@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> 認証画面の日本語化とReactアプリレイアウトを整える</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -361,6 +361,7 @@ Successfully set up the new user.
 <p>引き続きDockerコンテナに入った状態で実施していきます。こちらも前項と同じく，以下コマンド実行後は設問となるので注意して下さい。</p>
 <pre><code class="language-sh">$ amplify init
 Note: It is recommended to run this command from the root of your app directory
+# Enterを押します
 ? Enter a name for the project reactamplify
 The following configuration will be applied:
 
@@ -407,6 +408,83 @@ Some next steps:
 Pro tip:
 Try &quot;amplify add api&quot; to create a backend API and then &quot;amplify publish&quot; to deploy everything
 </code></pre>
+<p>完了したら<code>react-amplify</code>の配下に<code>amplify</code>フォルダが作成されます。<br>Amplifyプロジェクトの作成が完了したら，Amplifyの認証を進めます。</p>
+<h1><a class="header" href="#8-amplifyの認証サービスを追加する" id="8-amplifyの認証サービスを追加する">8. Amplifyの認証サービスを追加する</a></h1>
+<p>こちらも前項と同じく，以下コマンド実行を行いますが，同じように設問となるので注意して下さい。</p>
+<pre><code class="language-sh">$ amplify add auth
+Using service: Cognito, provided by: awscloudformation
+ 
+ The current configured provider is Amazon Cognito. 
+ # Default configurationを選択する
+ Do you want to use the default authentication and security configuration? Default config
+uration
+ Warning: you will not be able to edit these selections. 
+ # Usernameを選択
+ How do you want users to be able to sign in? Username
+ # No, I am done.を選択
+ Do you want to configure advanced settings? No, I am done.
+</code></pre>
+<p><strong>Successfully</strong>まで表示されたら，追加したauthをデプロイします。数分かかるので待ちます。</p>
+<pre><code class="language-sh">$ amplify push --y
+</code></pre>
+<p>完了すると<code>reactamplify</code>の認証アプリが作成されます。以下のコマンドでAWSコンソール上でも確認出来ます。</p>
+<pre><code class="language-sh">$ amplify console
+# Consoleを選択 
+✔ Which site do you want to open? · Console
+</code></pre>
+<p>次はReactアプリへ認証機能を追加していきます。</p>
+<h1><a class="header" href="#9-reactアプリに認証機能を追加する" id="9-reactアプリに認証機能を追加する">9. Reactアプリに認証機能を追加する</a></h1>
+<p>ReactアプリにAmplifyライブラリをインストールします。</p>
+<pre><code class="language-sh">$ npm install aws-amplify @aws-amplify/ui-react
+</code></pre>
+<p><code>react-amplify/src/index.tsx</code>を修正する。</p>
+<pre><code class="language-jsx">// index.tsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import Amplify from 'aws-amplify';
+import config from './aws-exports';
+Amplify.configure(config);
+
+ReactDOM.render(
+  &lt;React.StrictMode&gt;
+    &lt;App /&gt;
+  &lt;/React.StrictMode&gt;,
+  document.getElementById('root')
+);
+
+reportWebVitals();
+</code></pre>
+<p><code>react-amplify/src/App.tsx</code>を修正する。</p>
+<pre><code class="language-jsx">import logo from './logo.svg';
+import './App.css';
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
+
+function App() {
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;header&gt;
+        &lt;img src={logo} className=&quot;App-logo&quot; alt=&quot;logo&quot; /&gt;
+        &lt;h1&gt;Hello Amplify!!&lt;/h1&gt;
+      &lt;/header&gt;
+      &lt;AmplifySignOut /&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default withAuthenticator(App);
+</code></pre>
+<p>ここまで修正したら<code>yarn start</code>で起動しましょう。<code>http://localhost:3000/</code>でアクセスすると以下の画面が表示されます。<br>画面内の<strong>Create account</strong>からアカウントを作成します。</p>
+<p><img src="./img/2021-05-06-06-37-41.png" alt="" /></p>
+<p>アカウントの作成画面に移動するので，作成します。次の画面で確認コードを入力する必要があるので，<strong>有効なメールアドレス</strong>を入力して下さい。</p>
+<p><img src="./img/2021-05-06-06-43-41.png" alt="" /></p>
+<p><img src="./img/2021-05-06-06-46-07.png" alt="" /></p>
+<p>送られてきたメールの確認コードを入力するとログイン出来ます。</p>
+<p><img src="./img/2021-05-06-06-47-32.png" alt="" /></p>
+<p>この時点での成果をプッシュしていき，自動デプロイの結果も確認しましょう。</p>
+<h1><a class="header" href="#10-成果を自動デプロイで確認する" id="10-成果を自動デプロイで確認する">10. 成果を自動デプロイで確認する</a></h1>
 
                     </main>
 

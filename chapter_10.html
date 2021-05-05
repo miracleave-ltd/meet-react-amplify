@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>03. GitHubにpushする</title>
+        <title>10. 認証画面の日本語化とReactアプリレイアウトを整える</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html" class="active"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> 認証画面の日本語化とReactアプリレイアウトを整える</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html" class="active"><strong aria-hidden="true">10.</strong> 認証画面の日本語化とReactアプリレイアウトを整える</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,41 +163,18 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#3-githubにpushする" id="3-githubにpushする">3. GitHubにpushする</a></h1>
-<p>ご自身のGitHubアカウントへアクセスし，新しくリポジトリを作成します。</p>
-<p><img src="./img/2021-05-05-23-52-17.png" alt="" /></p>
-<p>公開範囲は<strong>public</strong>でも<strong>private</strong>のどちらでもお好きな方を選択してください。</p>
-<p><img src="./img/2021-05-06-00-01-52.png" alt="" /></p>
-<p>リポジトリを作成したら以下を実行しますが，Dockerのコンテナ内から実行するため，メールアドレスとユーザー名はご自身の環境に合わせて下さい。実行時にユーザー名とパスワードが求められます。</p>
-<pre><code class="language-bash">$ git init
-# ※ご自身の環境に合わせて下さい
-$ git config --global user.email &quot;your-mailaddress@example.com&quot;
-$ git config --global user.name &quot;your name&quot;
-$ git add .
-$ git commit -m &quot;first commit&quot;
-$ git branch -M main
-# ※ご自身の環境に合わせて下さい
-$ git remote add origin https://github.com/{your name}/react-amplify.git
-$ git push -u origin main
-</code></pre>
-<p>以下の通り，反映されていればOKです。</p>
-<p><img src="./img/2021-05-06-00-31-53.png" alt="" /></p>
-<p>ここまで完了したらAWSコンソールからAmplifyを使用してデプロイします。</p>
+                        <h1><a class="header" href="#10-成果を自動デプロイで確認する" id="10-成果を自動デプロイで確認する">10. 成果を自動デプロイで確認する</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="chapter_2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="chapter_9.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="chapter_4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -207,15 +184,11 @@ $ git push -u origin main
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="chapter_2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="chapter_9.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a rel="next" href="chapter_4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 
