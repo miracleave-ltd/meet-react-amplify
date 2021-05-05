@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  mdbook:
+    container_name: mdbook
+    image: peaceiris/mdbook:v0.4.7-rust
+    stdin_open: true
+    tty: true
+    ports:
+      - 8080:8080
+      - 8081:8081
+    volumes:
+      - ${PWD}:/book
+    command:
+      - serve
+      - --hostname
+      - '0.0.0.0'
+      - --port
+      - '8080'
