@@ -5,6 +5,7 @@
 ```sh
 $ amplify init
 Note: It is recommended to run this command from the root of your app directory
+# Enterを押します
 ? Enter a name for the project reactamplify
 The following configuration will be applied:
 
@@ -51,3 +52,5 @@ Some next steps:
 Pro tip:
 Try "amplify add api" to create a backend API and then "amplify publish" to deploy everything
 ```
+
+完了したら`react-amplify`の配下に`amplify`フォルダが作成されます。<br>Amplifyプロジェクトの作成が完了したら，Amplifyの認証を進めます。
