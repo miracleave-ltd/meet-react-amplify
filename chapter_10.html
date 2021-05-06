@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>10. 自動デプロイ(CI)の設定を変更</title>
+        <title>10. 自動デプロイの設定を変更</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html" class="active"><strong aria-hidden="true">10.</strong> 自動デプロイ(CI)の設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">11.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html" class="active"><strong aria-hidden="true">10.</strong> 自動デプロイの設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">11.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,11 +163,14 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#10-自動デプロイciの設定を変更" id="10-自動デプロイciの設定を変更">10. 自動デプロイ(CI)の設定を変更</a></h1>
-<p>実は<code>.gitignore</code>に<code>aws-exports.js</code>が含まれてしまっているため，このままだとフロントエンドのビルドで<strong>aws-exports.jsファイルが見つからない</strong>というエラーが発生します。<br>試しに前項からGitへプッシュするとデプロイで失敗となります（試しても試さなくても構いません）。<br>これを解決するためにAmplifyの環境変数とビルド設定を更新します。<br>
-まずは環境変数を設定します。</p>
+                        <h1><a class="header" href="#1-自動デプロイの設定を変更" id="1-自動デプロイの設定を変更">1. 自動デプロイの設定を変更</a></h1>
+<h2><a class="header" href="#11-なぜ設定を変更するのか" id="11-なぜ設定を変更するのか">1.1. なぜ設定を変更するのか</a></h2>
+<p>実は<code>.gitignore</code>に<code>aws-exports.js</code>が含まれてしまっているため，このままだとフロントエンドのビルドで<strong>aws-exports.jsファイルが見つからない</strong>というエラーが発生します。<br>試しに前項からGitへプッシュするとデプロイで失敗となります（試しても試さなくても構いません）。AWSコンソール上でこの問題を解決していきます。</p>
+<h2><a class="header" href="#12-環境変数の追加" id="12-環境変数の追加">1.2. 環境変数の追加</a></h2>
+<p>Amplifyの環境変数を更新します。</p>
 <p>以下のように<code>aws-exports.js</code>に書いてあるプログラムをコピーします。こちらが環境変数の値となります。変数名は<code>secretfile</code>としています。</p>
 <p><img src="./img/2021-05-06-09-33-15.png" alt="" /></p>
+<h2><a class="header" href="#13-ビルド設定の追加" id="13-ビルド設定の追加">1.3. ビルド設定の追加</a></h2>
 <p>次はビルド設定を更新します。下図のとおりビルド設定に一行追加します。AWSコンソール上で修正してOKです。</p>
 <p><img src="./img/2021-05-06-09-40-25.png" alt="" /></p>
 <p>プログラム上は以下となります。</p>
@@ -190,14 +193,16 @@ frontend:
     paths:
       - node_modules/**/*
 </code></pre>
-<p>では変更したコードをプッシュします。</p>
+<h2><a class="header" href="#14-自動デプロイが成功するか確認" id="14-自動デプロイが成功するか確認">1.4. 自動デプロイが成功するか確認</a></h2>
+<p>変更したコードをプッシュします。</p>
 <pre><code>$ git add .
 # コメントはお好きなように
 $ git commit -m &quot;modified amplify auth add.&quot;
 $ git push
 </code></pre>
-<p>しばらくすると自動デプロイが正常に完了することが確認出来ます。</p>
+<p>しばらくすると自動デプロイの正常完了が確認出来ます。</p>
 <p><img src="./img/2021-05-06-09-46-16.png" alt="" /></p>
+<h2><a class="header" href="#15-コードを変更しない場合の再デプロイ方法について" id="15-コードを変更しない場合の再デプロイ方法について">1.5. コードを変更しない場合の再デプロイ方法について</a></h2>
 <p>もし，デプロイ時の試している方は以下からGitプッシュを行わなくても再デプロイが可能です。赤枠部はリンクになっているので飛んだ先で手動での再デプロイが可能です。</p>
 <p><img src="./img/2021-05-06-09-50-03.png" alt="" /></p>
 <p><img src="./img/2021-05-06-09-49-32.png" alt="" /></p>

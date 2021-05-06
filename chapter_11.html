@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> 自動デプロイ(CI)の設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_11.html" class="active"><strong aria-hidden="true">11.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> 自動デプロイの設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_11.html" class="active"><strong aria-hidden="true">11.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,17 +163,20 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#11-amplifyの認証画面を日本語化する" id="11-amplifyの認証画面を日本語化する">11. Amplifyの認証画面を日本語化する</a></h1>
+                        <h1><a class="header" href="#1-amplifyの認証画面を修正する" id="1-amplifyの認証画面を修正する">1. Amplifyの認証画面を修正する</a></h1>
+<h2><a class="header" href="#11-画面レイアウトを修正する" id="11-画面レイアウトを修正する">1.1. 画面レイアウトを修正する</a></h2>
+<p>追加と修正を行うファイルは下図の赤枠が対象です。</p>
+<p><img src="./img/2021-05-06-10-30-52.png" alt="" /></p>
 <p>ここでは，Amplifyで提供されているコンポーネントを日本語化し，ログイン後の画面を簡素ですが少しだけ変更する，という事を進めます。本当に簡易的なレイアウト追加なので付録的な内容だと思っていただければと思います。最終的には以下の画面になります。</p>
 <p>ログイン
 <img src="./img/2021-05-06-09-55-13.png" alt="" /></p>
 <p>ログイン後
 <img src="./img/2021-05-06-09-55-42.png" alt="" /></p>
+<h2><a class="header" href="#12-semantic-ui-reactの追加" id="12-semantic-ui-reactの追加">1.2. Semantic UI Reactの追加</a></h2>
 <p>semantic-uiをインストールします（長いです）。インストールが完了したら次へ進みます。</p>
 <pre><code class="language-sh">$ npm install semantic-ui-react semantic-ui-css
 </code></pre>
-<p>追加と修正を行うファイルは下図の赤枠が対象です。</p>
-<p><img src="./img/2021-05-06-10-30-52.png" alt="" /></p>
+<h2><a class="header" href="#13-amplifyの認証画面を日本語化" id="13-amplifyの認証画面を日本語化">1.3. Amplifyの認証画面を日本語化</a></h2>
 <p>日本語化用のファイルを作成します。</p>
 <p><code>react-amplify/src/assets/i18n/amplify/</code>のフォルダを作成し，配下に<code>localization.js</code>を作成します。<br>翻訳辞書的な内容ですが，これでも全てカバー出来ないとは思いますので気休め程度に。</p>
 <pre><code class="language-javascript">// localization.js
@@ -230,6 +233,31 @@ export const localization = {
   },
 };
 </code></pre>
+<p>日本語化の内容を適用するために<code>index.tsx</code>を修正します。</p>
+<pre><code class="language-ts">// index.tsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import Amplify, { I18n } from 'aws-amplify';
+import { localization } from './assets/i18n/amplify/localization';
+import config from './aws-exports';
+Amplify.configure(config);
+
+I18n.putVocabularies(localization);
+I18n.setLanguage('ja');
+
+ReactDOM.render(
+  &lt;React.StrictMode&gt;
+    &lt;App /&gt;
+  &lt;/React.StrictMode&gt;,
+  document.getElementById('root')
+);
+
+reportWebVitals();
+</code></pre>
+<h2><a class="header" href="#14-ログイン後の画面レイアウトを修正" id="14-ログイン後の画面レイアウトを修正">1.4. ログイン後の画面レイアウトを修正</a></h2>
 <p>ログイン後のコンポーネントを作成します。</p>
 <p><code>react-amplify/src/layout</code>フォルダを作成します。このフォルダ配下に<code>NavBar.tsx</code>と<code>DemoContent.tsx</code>を追加していきます。<br>まず，<code>NavBar.tsx</code>を追加します。これは<code>App.tsx</code>で渡ってくるログインしたユーザー名を受け取りますが，この時点ではこのまま書いてもエラーが出ると思いますが，最後の<code>App.tsx</code>まで修正すると解消するので一旦は無視しましょう。</p>
 <pre><code class="language-ts">// NavBar.tsx(ログイン後のヘッダー部)
@@ -346,30 +374,6 @@ export default function DemoContent() {
     )
 }
 </code></pre>
-<p>日本語化の内容を適用するために<code>index.tsx</code>を修正します。</p>
-<pre><code class="language-ts">// index.tsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import Amplify, { I18n } from 'aws-amplify';
-import { localization } from './assets/i18n/amplify/localization';
-import config from './aws-exports';
-Amplify.configure(config);
-
-I18n.putVocabularies(localization);
-I18n.setLanguage('ja');
-
-ReactDOM.render(
-  &lt;React.StrictMode&gt;
-    &lt;App /&gt;
-  &lt;/React.StrictMode&gt;,
-  document.getElementById('root')
-);
-
-reportWebVitals();
-</code></pre>
 <p>ログイン時と非ログイン時の出し分けと，ユーザー名を<code>NavBar</code>コンポーネントに渡すくらいしかしていませんが，最後に<code>App.tsx</code>を修正します。</p>
 <pre><code class="language-ts">// App.tsx
 import React, { useEffect, useState } from 'react';
@@ -402,7 +406,7 @@ const App = () =&gt; {
 
 export default App;
 </code></pre>
-<p>これでざっくりと画面レイアウトを変更出来たので，完了となります。AmplifyのコンポーネントやらAPIもかなり用意されているようですが，これを使いこなすのはなかなか大変ですね。<br>これにて「mirameet vol.16」のハンズオンは終了となります。ご参加いただいた方，お疲れ様でした。</p>
+<p>これでざっくりと画面レイアウトを変更出来たので，完了となります。認証機能がこれだけ簡単に実装出来るとは...という驚きが多いAmplifyでした。AmplifyコンポーネントやらAPIもかなり用意されているようですが，これを使いこなすのはなかなか骨は折れそうです。<br>これにて「mirameet vol.16」のハンズオンは終了となります。ご参加いただいた方，お疲れ様でした。</p>
 
                     </main>
 

@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html" class="active"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> 自動デプロイ(CI)の設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">11.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html" class="active"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> 自動デプロイの設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">11.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,21 +163,25 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#4-amplifyでデプロイ" id="4-amplifyでデプロイ">4. Amplifyでデプロイ</a></h1>
+                        <h1><a class="header" href="#1-amplifyでデプロイ" id="1-amplifyでデプロイ">1. Amplifyでデプロイ</a></h1>
 <p>AWSコンソールにサインインし，Amplifyサービスを検索，選択します。</p>
+<h2><a class="header" href="#11-amplifyサービスの選択" id="11-amplifyサービスの選択">1.1. Amplifyサービスの選択</a></h2>
 <p><img src="./img/2021-05-06-00-49-35.png" alt="" /></p>
 <p>Amplifyのサービス画面に移動したらページ下部のDeliverのGet startedを選択します。</p>
 <p><img src="./img/2021-05-06-00-53-19.png" alt="" /></p>
+<h2><a class="header" href="#12-amplifyとgithubの連携" id="12-amplifyとgithubの連携">1.2. AmplifyとGitHubの連携</a></h2>
 <p>GitHubを選択し，次へ進みます。</p>
 <p><img src="./img/2021-05-06-00-56-16.png" alt="" /></p>
 <p>GitHubの認証が必要なので完了させると以下のとおり，リポジトリと連携出来るようになります。<br>前項で作成したリポジトリの<code>react-amplify</code>を選択し，<strong>次へ</strong>を選択します。</p>
 <p><img src="./img/2021-05-06-00-58-58.png" alt="" /></p>
+<h2><a class="header" href="#13-amplifyの自動ビルド設定とデプロイ" id="13-amplifyの自動ビルド設定とデプロイ">1.3. Amplifyの自動ビルド設定とデプロイ</a></h2>
 <p>ビルド設定の構成ではデフォルトのまま，<strong>次へ</strong>を選択します。</p>
 <p><img src="./img/2021-05-06-01-07-18.png" alt="" /></p>
 <p>確認まで進んだら<strong>保存してデプロイ</strong>を選択します。</p>
 <p><img src="./img/2021-05-06-01-09-10.png" alt="" /></p>
 <p>Amplifyによって自動でビルドされ、アプリが公開されますが<strong>検証</strong>まで完了するのは少し時間がかかります。下図の赤枠部から公開されたページに飛べます。</p>
 <p><img src="./img/2021-05-06-01-13-13.png" alt="" /></p>
+<h2><a class="header" href="#14-デプロイされたreactアプリの確認" id="14-デプロイされたreactアプリの確認">1.4. デプロイされたReactアプリの確認</a></h2>
 <p>完了すると「2. Reactアプリ作成」で最後に確認した同じ画面が表示されます。</p>
 <p><img src="./img/2021-05-05-23-42-02.png" alt="" /></p>
 <p>次はReactのコードを変更して，自動デプロイが出来るようになっているか確認していきます。</p>
