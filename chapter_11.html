@@ -164,13 +164,245 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#11-amplifyの認証画面を日本語化する" id="11-amplifyの認証画面を日本語化する">11. Amplifyの認証画面を日本語化する</a></h1>
-<p>ここでは，Amplifyで提供されているコンポーネントを日本語化し，ログイン後の画面を簡素ですが少しだけ変更する，という事を進めます。最終的には以下の画面になります。</p>
+<p>ここでは，Amplifyで提供されているコンポーネントを日本語化し，ログイン後の画面を簡素ですが少しだけ変更する，という事を進めます。本当に簡易的なレイアウト追加なので付録的な内容だと思っていただければと思います。最終的には以下の画面になります。</p>
 <p>ログイン
 <img src="./img/2021-05-06-09-55-13.png" alt="" /></p>
 <p>ログイン後
 <img src="./img/2021-05-06-09-55-42.png" alt="" /></p>
+<p>semantic-uiをインストールします（長いです）。インストールが完了したら次へ進みます。</p>
 <pre><code class="language-sh">$ npm install semantic-ui-react semantic-ui-css
 </code></pre>
+<p>追加と修正を行うファイルは下図の赤枠が対象です。</p>
+<p><img src="./img/2021-05-06-10-30-52.png" alt="" /></p>
+<p>日本語化用のファイルを作成します。</p>
+<p><code>react-amplify/src/assets/i18n/amplify/</code>のフォルダを作成し，配下に<code>localization.js</code>を作成します。<br>翻訳辞書的な内容ですが，これでも全てカバー出来ないとは思いますので気休め程度に。</p>
+<pre><code class="language-javascript">// localization.js
+export const localization = {
+  ja: {
+      'Sign In': 'サインイン',
+      'Sign Up': 'サインアップ',
+      'Sign Out': 'サインアウト',
+      'Sign in to your account': 'アカウントにサインイン',
+      'Username *': 'ユーザー名 *',
+      'Password *': 'パスワード *',
+      'Enter your username': 'ユーザー名を入力',
+      'Enter your password': 'パスワードを入力',
+      'No account?': 'アカウントが未登録ですか？',
+      'Forgot your password?': 'パスワードをお忘れですか？',
+      'Reset password': 'パスワードをリセット',
+      'User does not exist': 'ユーザーが存在しません',
+      'User already exists': 'ユーザーは既に存在します',
+      'Incorrect username or password.': 'ユーザー名またはパスワードが違います',
+      'Invalid password format': 'パスワードのフォーマットが不正です',
+      'Create account': 'アカウントを作成',
+      'Forgot Password': 'パスワードを忘れた',
+      'Change Password': 'パスワードを変更',
+      'New Password': '新しいパスワード',
+      'Email': 'Email',
+      'Phone Number': '電話番号',
+      'Confirm a Code': 'コードを確認',
+      'Confirm Sign In': 'サインインを確認',
+      'Confirm Sign up': 'サインアップを確認',
+      'Back to Sign In': 'サインインに戻る',
+      'Send Code': 'コードを送信',
+      'Confirm': '確認',
+      'Resend Code': 'コードを再送',
+      'Submit': '送信',
+      'Skip': 'スキップ',
+      'Verify': '検証',
+      'Verify Contact': '連絡先を検証',
+      'Code': 'Code',
+      'Confirmation Code': '確認コード',
+      'Lost your code?': 'コードがありませんか？',
+      'Account recovery requires verified contact information': 'Account recovery requires verified contact information',
+      'Invalid phone number format': '不正な電話番号フォーマットです。 電話番号は次のフォーマットで入力してください: +12345678900',
+      'Create Account': 'アカウントを作成',
+      'Have an account?': 'アカウントをお持ちですか？',
+      'Sign in': 'サインイン',
+      'Create a new account': '新しいアカウントを作成',
+      'Reset your password': 'パスワードをリセット',
+      'An account with the given email already exists.': 'そのメールアドレスは既に存在します',
+      'Username cannot be empty': 'ユーザー名は必須です',
+      'Password attempts exceeded': 'パスワード試行回数が超過しました',
+      'Email Address *': 'メールアドレス',
+      'Phone Number *': '電話番号',
+      'User does not exist.': '存在しないユーザーです'
+  },
+};
+</code></pre>
+<p>ログイン後のコンポーネントを作成します。</p>
+<p><code>react-amplify/src/layout</code>フォルダを作成します。このフォルダ配下に<code>NavBar.tsx</code>と<code>DemoContent.tsx</code>を追加していきます。<br>まず，<code>NavBar.tsx</code>を追加します。これは<code>App.tsx</code>で渡ってくるログインしたユーザー名を受け取りますが，この時点ではこのまま書いてもエラーが出ると思いますが，最後の<code>App.tsx</code>まで修正すると解消するので一旦は無視しましょう。</p>
+<pre><code class="language-ts">// NavBar.tsx(ログイン後のヘッダー部)
+import { AmplifySignOut } from '@aws-amplify/ui-react';
+import logo from '../logo.svg';
+import React, { FC } from 'react';
+import { Container, Menu } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css'
+
+type NavProps = {
+  username: string;
+}
+
+ const NavBar: FC&lt;NavProps&gt; = (navProps) =&gt; {
+  const { username } = navProps;
+  return (
+    &lt;Menu block='true' inverted&gt;
+      &lt;Container&gt;
+        &lt;Menu.Item header&gt;
+          &lt;img src={logo} alt=&quot;logo&quot; /&gt;
+            Hello {username} !!
+        &lt;/Menu.Item&gt;
+        &lt;Menu.Item position='right'&gt;
+          &lt;AmplifySignOut /&gt;
+        &lt;/Menu.Item&gt;
+      &lt;/Container&gt;
+    &lt;/Menu&gt;
+  )
+}
+export default NavBar;
+</code></pre>
+<p><code>DemoContent.tsx</code>を追加。あくまで飾り程度の残念コンポーネントです。こちらは何も動的な動作をしないので，特にエラーは起こりません。</p>
+<pre><code class="language-ts">// DemoContent.tsx
+import { Card, Container, Icon, Image } from &quot;semantic-ui-react&quot;;
+
+export default function DemoContent() {
+    return (
+      &lt;Container&gt;
+        &lt;Card.Group&gt;
+          &lt;Card&gt;
+            &lt;Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' wrapped ui={false} /&gt;
+            &lt;Card.Content&gt;
+              &lt;Card.Header&gt;Matthew&lt;/Card.Header&gt;
+              &lt;Card.Meta&gt;
+                &lt;span className='date'&gt;Joined in 2015&lt;/span&gt;
+              &lt;/Card.Meta&gt;
+              &lt;Card.Description&gt;
+                Matthew is a musician living in Nashville.
+              &lt;/Card.Description&gt;
+            &lt;/Card.Content&gt;
+            &lt;Card.Content extra&gt;
+              &lt;a href=&quot;example.com&quot;&gt;
+                &lt;Icon name='user' /&gt;
+                12 Friends
+              &lt;/a&gt;
+            &lt;/Card.Content&gt;
+          &lt;/Card&gt;
+          &lt;Card&gt;
+            &lt;Image src='https://react.semantic-ui.com/images/avatar/large/elliot.jpg' wrapped ui={false} /&gt;
+            &lt;Card.Content&gt;
+              &lt;Card.Header&gt;elliot&lt;/Card.Header&gt;
+              &lt;Card.Meta&gt;
+                &lt;span className='date'&gt;Joined in 2021&lt;/span&gt;
+              &lt;/Card.Meta&gt;
+              &lt;Card.Description&gt;
+              Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat.
+              &lt;/Card.Description&gt;
+            &lt;/Card.Content&gt;
+            &lt;Card.Content extra&gt;
+              &lt;a href=&quot;example.com&quot;&gt;
+                &lt;Icon name='user' /&gt;
+                20 Friends
+              &lt;/a&gt;
+            &lt;/Card.Content&gt;
+          &lt;/Card&gt;
+          &lt;Card&gt;
+            &lt;Image src='https://react.semantic-ui.com/images/avatar/large/steve.jpg' wrapped ui={false} /&gt;
+            &lt;Card.Content&gt;
+              &lt;Card.Header&gt;Steve Sanders&lt;/Card.Header&gt;
+              &lt;Card.Meta&gt;
+                &lt;span className='date'&gt;Joined in 2015&lt;/span&gt;
+              &lt;/Card.Meta&gt;
+              &lt;Card.Description&gt;
+              Steve wants to add you to the group &lt;strong&gt;best friends&lt;/strong&gt;
+              &lt;/Card.Description&gt;
+            &lt;/Card.Content&gt;
+            &lt;Card.Content extra&gt;
+              &lt;a href=&quot;example.com&quot;&gt;
+                &lt;Icon name='user' /&gt;
+                18 Friends
+              &lt;/a&gt;
+            &lt;/Card.Content&gt;
+          &lt;/Card&gt;
+          &lt;Card&gt;
+            &lt;Image src='https://react.semantic-ui.com/images/avatar/large/molly.png' wrapped ui={false} /&gt;
+            &lt;Card.Content&gt;
+              &lt;Card.Header&gt;molly&lt;/Card.Header&gt;
+              &lt;Card.Meta&gt;
+                &lt;span className='date'&gt;Joined in 2019&lt;/span&gt;
+              &lt;/Card.Meta&gt;
+              &lt;Card.Description&gt;
+                molly is a musician living in Nashville.
+              &lt;/Card.Description&gt;
+            &lt;/Card.Content&gt;
+            &lt;Card.Content extra&gt;
+              &lt;a href=&quot;example.com&quot;&gt;
+                &lt;Icon name='user' /&gt;
+                2 Friends
+              &lt;/a&gt;
+            &lt;/Card.Content&gt;
+          &lt;/Card&gt;
+        &lt;/Card.Group&gt;
+      &lt;/Container&gt;
+    )
+}
+</code></pre>
+<p>日本語化の内容を適用するために<code>index.tsx</code>を修正します。</p>
+<pre><code class="language-ts">// index.tsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import Amplify, { I18n } from 'aws-amplify';
+import { localization } from './assets/i18n/amplify/localization';
+import config from './aws-exports';
+Amplify.configure(config);
+
+I18n.putVocabularies(localization);
+I18n.setLanguage('ja');
+
+ReactDOM.render(
+  &lt;React.StrictMode&gt;
+    &lt;App /&gt;
+  &lt;/React.StrictMode&gt;,
+  document.getElementById('root')
+);
+
+reportWebVitals();
+</code></pre>
+<p>ログイン時と非ログイン時の出し分けと，ユーザー名を<code>NavBar</code>コンポーネントに渡すくらいしかしていませんが，最後に<code>App.tsx</code>を修正します。</p>
+<pre><code class="language-ts">// App.tsx
+import React, { useEffect, useState } from 'react';
+import './App.css';
+import {AmplifyAuthenticator } from '@aws-amplify/ui-react';
+import { AuthState, onAuthUIStateChange} from &quot;@aws-amplify/ui-components&quot;;
+import NavBar from './layout/NavBar';
+import DemoContent from './layout/DemoContent';
+
+const App = () =&gt; {
+  const [authState, setAuthState] = useState&lt;AuthState&gt;();
+  const [user, setUser] = useState&lt;any&gt;(); 
+
+  useEffect(() =&gt; {
+    return onAuthUIStateChange((nextAuthState, authData) =&gt; {
+      setAuthState(nextAuthState);
+      setUser(authData);
+    });
+  }, []);
+
+  return authState === AuthState.SignedIn &amp;&amp; user ? (
+    &lt;div&gt;
+        &lt;NavBar username={user.username}/&gt;
+        &lt;DemoContent /&gt;
+    &lt;/div&gt;
+  ) : (
+      &lt;AmplifyAuthenticator /&gt;
+  );
+}
+
+export default App;
+</code></pre>
+<p>これでざっくりと画面レイアウトを変更出来たので，完了となります。AmplifyのコンポーネントやらAPIもかなり用意されているようですが，これを使いこなすのはなかなか大変ですね。<br>これにて「mirameet vol.16」のハンズオンは終了となります。ご参加いただいた方，お疲れ様でした。</p>
 
                     </main>
 
