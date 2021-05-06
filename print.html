@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> 認証画面の日本語化とReactアプリレイアウトを整える</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> 自動デプロイ(CI)の設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">11.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -483,8 +483,54 @@ export default withAuthenticator(App);
 <p><img src="./img/2021-05-06-06-46-07.png" alt="" /></p>
 <p>送られてきたメールの確認コードを入力するとログイン出来ます。</p>
 <p><img src="./img/2021-05-06-06-47-32.png" alt="" /></p>
-<p>この時点での成果をプッシュしていき，自動デプロイの結果も確認しましょう。</p>
-<h1><a class="header" href="#10-成果を自動デプロイで確認する" id="10-成果を自動デプロイで確認する">10. 成果を自動デプロイで確認する</a></h1>
+<p>この時点での成果をプッシュしていき，自動デプロイの結果も確認したいところですが，AWSコンソール上でAmplifyの設定を更新する箇所がありますので次項で進めます。</p>
+<h1><a class="header" href="#10-自動デプロイciの設定を変更" id="10-自動デプロイciの設定を変更">10. 自動デプロイ(CI)の設定を変更</a></h1>
+<p>実は<code>.gitignore</code>に<code>aws-exports.js</code>が含まれてしまっているため，このままだとフロントエンドのビルドで<strong>aws-exports.jsファイルが見つからない</strong>というエラーが発生します。<br>試しに前項からGitへプッシュするとデプロイで失敗となります（試しても試さなくても構いません）。<br>これを解決するためにAmplifyの環境変数とビルド設定を更新します。<br>
+まずは環境変数を設定します。</p>
+<p>以下のように<code>aws-exports.js</code>に書いてあるプログラムをコピーします。こちらが環境変数の値となります。変数名は<code>secretfile</code>としています。</p>
+<p><img src="./img/2021-05-06-09-33-15.png" alt="" /></p>
+<p>次はビルド設定を更新します。下図のとおりビルド設定に一行追加します。AWSコンソール上で修正してOKです。</p>
+<p><img src="./img/2021-05-06-09-40-25.png" alt="" /></p>
+<p>プログラム上は以下となります。</p>
+<pre><code class="language-yml">version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # 追加
+        - echo $secretfile &gt; ./src/aws-exports.js
+        - yarn install
+    build:
+      commands:
+        - yarn run build
+  artifacts:
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+</code></pre>
+<p>では変更したコードをプッシュします。</p>
+<pre><code>$ git add .
+# コメントはお好きなように
+$ git commit -m &quot;modified amplify auth add.&quot;
+$ git push
+</code></pre>
+<p>しばらくすると自動デプロイが正常に完了することが確認出来ます。</p>
+<p><img src="./img/2021-05-06-09-46-16.png" alt="" /></p>
+<p>もし，デプロイ時の試している方は以下からGitプッシュを行わなくても再デプロイが可能です。赤枠部はリンクになっているので飛んだ先で手動での再デプロイが可能です。</p>
+<p><img src="./img/2021-05-06-09-50-03.png" alt="" /></p>
+<p><img src="./img/2021-05-06-09-49-32.png" alt="" /></p>
+<p>ここまでで完了です。お疲れ様でした。<br>とはいえ今のままでは若干見た目も微妙なので，まだ時間に余力があれば次項を進めてください。</p>
+<h1><a class="header" href="#11-amplifyの認証画面を日本語化する" id="11-amplifyの認証画面を日本語化する">11. Amplifyの認証画面を日本語化する</a></h1>
+<p>ここでは，Amplifyで提供されているコンポーネントを日本語化し，ログイン後の画面を簡素ですが少しだけ変更する，という事を進めます。最終的には以下の画面になります。</p>
+<p>ログイン
+<img src="./img/2021-05-06-09-55-13.png" alt="" /></p>
+<p>ログイン後
+<img src="./img/2021-05-06-09-55-42.png" alt="" /></p>
+<pre><code class="language-sh">$ npm install semantic-ui-react semantic-ui-css
+</code></pre>
 
                     </main>
 

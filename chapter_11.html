@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>01. 環境作成</title>
+        <title>11. Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html" class="active"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> 自動デプロイ(CI)の設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">11.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> 自動デプロイ(CI)の設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_11.html" class="active"><strong aria-hidden="true">11.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,73 +163,25 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#環境作成" id="環境作成">環境作成</a></h1>
-<p>Dockerで作成します。</p>
-<p><code>docker-compose.yml</code>と<code>Dockerfile</code>を用意します。<br><code>docker-compose.yml</code>は以下の通り。</p>
-<pre><code class="language-yml">version: '3'
-
-services:
-    amplify:
-        build: ./
-        ports:
-            - &quot;3000:3000&quot;
-            - &quot;3001:3001&quot;
-        volumes:
-            - ./:/var/www/amplify-demo/
-            - ./aws/:/root/.aws/
-        tty: true
+                        <h1><a class="header" href="#11-amplifyの認証画面を日本語化する" id="11-amplifyの認証画面を日本語化する">11. Amplifyの認証画面を日本語化する</a></h1>
+<p>ここでは，Amplifyで提供されているコンポーネントを日本語化し，ログイン後の画面を簡素ですが少しだけ変更する，という事を進めます。最終的には以下の画面になります。</p>
+<p>ログイン
+<img src="./img/2021-05-06-09-55-13.png" alt="" /></p>
+<p>ログイン後
+<img src="./img/2021-05-06-09-55-42.png" alt="" /></p>
+<pre><code class="language-sh">$ npm install semantic-ui-react semantic-ui-css
 </code></pre>
-<p><code>Dockerfile</code>は以下の通り。</p>
-<pre><code class="language-sh">FROM node:14.16.1
-
-# amplify CLIをインストールする
-RUN npm install -g @aws-amplify/cli
-
-WORKDIR /var/www/amplify-demo
-</code></pre>
-<p>上記ファイルを配置するディレクトリは以下の通りです（Mac）。</p>
-<pre><code>/Users/{ユーザー名}/Projects/amplify-demo
-├── Dockerfile
-└── docker-compose.yml
-</code></pre>
-<p>作成したファイルを使用してDockerを起動します。</p>
-<pre><code>$ docker-compose up -d
-</code></pre>
-<p>立ち上がったらコンテナの中に入っていきますが，念の為，起動状態の確認とコンテナ名の確認を行います。以下の例だと<code>amplify-demo_amplify_1</code>がコンテナ名です。</p>
-<pre><code class="language-sh">$ docker-compose ps
-         Name                     Command            State              Ports            
------------------------------------------------------------------------------------------
-amplify-demo_amplify_1   docker-entrypoint.sh node   Up      0.0.0.0:8080-&gt;8080/tcp,     
-                                                             0.0.0.0:8081-&gt;8081/tcp 
-</code></pre>
-<p>コンテナ名が確認出来たら，コンテナに入ります。</p>
-<pre><code>$ docker exec -it {コンテナ名(上記のName)} bash
-</code></pre>
-<p>念の為，<code>node</code>と<code>npm</code>のバージョンを確認します。</p>
-<pre><code class="language-sh">$ node -v &amp;&amp; npm -v
-v14.16.1
-6.14.12
-</code></pre>
-<p>さらに<code>amplify</code>もインストール出来ているか確認します。</p>
-<pre><code class="language-sh">$ amplify --version
-Initializing new Amplify CLI version...
-Done initializing new version.
-Scanning for plugins...
-Plugin scan successful
-4.50.2
-</code></pre>
-<p>要件を満たせているので，Reactアプリの作成をしていきます。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-
-                        
-                            <a rel="next" href="chapter_2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="prev" href="chapter_10.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
                             </a>
+                        
+
                         
 
                         <div style="clear: both"></div>
@@ -239,11 +191,11 @@ Plugin scan successful
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-
-                
-                    <a rel="next" href="chapter_2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="prev" href="chapter_10.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
                     </a>
+                
+
                 
             </nav>
 
