@@ -166,8 +166,18 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#環境作成" id="環境作成">環境作成</a></h1>
-<p>Dockerで作成します。</p>
-<p><code>docker-compose.yml</code>と<code>Dockerfile</code>を用意します。<br><code>docker-compose.yml</code>は以下の通り。</p>
+<p>Dockerで作成していきますが，最終的なプログラムは<a href="https://github.com/miracleave-ltd/meet-react-amplify/tree/main/amplify-demo">こちら</a>になります。<br>プログラム変更時のエディタはVS Codeを使用していますが，もちろんご自身が使いたいエディタで問題ありません。<br>これからDockerコンテナを使用するためのファイルを作成しますが，以下のフォルダ構成でルートとなる<code>amplify-demo</code>のフォルダを作成して下さい。</p>
+<pre><code class="language-sh"># Macの場合
+/Users/{ユーザー名}/Projects/amplify-demo
+├── Dockerfile
+└── docker-compose.yml
+
+# Windowsの場合
+C:¥Useres¥{ユーザー名}¥Projects/amplify-demo
+├── Dockerfile
+└── docker-compose.yml
+</code></pre>
+<p>上記フォルダを作成したら配下に<a href="https://github.com/miracleave-ltd/meet-react-amplify/blob/main/amplify-demo/Dockerfile"><code>docker-compose.yml</code></a>と<a href="https://github.com/miracleave-ltd/meet-react-amplify/blob/main/amplify-demo/docker-compose.yml"><code>Dockerfile</code></a>を用意します。<br><a href="https://github.com/miracleave-ltd/meet-react-amplify/blob/main/amplify-demo/Dockerfile"><code>docker-compose.yml</code></a>は以下の通り。</p>
 <pre><code class="language-yml">version: '3'
 
 services:
@@ -181,18 +191,13 @@ services:
             - ./aws/:/root/.aws/
         tty: true
 </code></pre>
-<p><code>Dockerfile</code>は以下の通り。</p>
+<p><a href="https://github.com/miracleave-ltd/meet-react-amplify/blob/main/amplify-demo/docker-compose.yml"><code>Dockerfile</code></a>は以下の通り。</p>
 <pre><code class="language-sh">FROM node:14.16.1
 
 # amplify CLIをインストールする
 RUN npm install -g @aws-amplify/cli
 
 WORKDIR /var/www/amplify-demo
-</code></pre>
-<p>上記ファイルを配置するディレクトリは以下の通りです（Mac）。</p>
-<pre><code>/Users/{ユーザー名}/Projects/amplify-demo
-├── Dockerfile
-└── docker-compose.yml
 </code></pre>
 <p>作成したファイルを使用してDockerを起動します。</p>
 <pre><code>$ docker-compose up -d
