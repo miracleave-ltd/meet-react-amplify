@@ -1,4 +1,6 @@
-# 2. Reactアプリ作成
+# 1. Reactアプリ作成
+
+## 1.1. create-react-appでReact x Typescript環境構築
 
 早速作成していきます。
 
@@ -7,6 +9,8 @@ $ npx create-react-app react-amplify --template typescript
 ```
 
 しばらく時間がかかるので少し待ちましょう。
+
+## 1.2. Reactアプリの動作確認
 
 `Happy hacking!`とコンソールに表示されたらReactアプリの起動を確認します。
 

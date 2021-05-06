@@ -1,4 +1,6 @@
-# 9. Reactアプリに認証機能を追加する
+# 1. Reactアプリに認証機能を追加する
+
+## 1.1. Amplifyライブラリの追加
 
 ReactアプリにAmplifyライブラリをインストールします。
 
@@ -6,9 +8,11 @@ ReactアプリにAmplifyライブラリをインストールします。
 $ npm install aws-amplify @aws-amplify/ui-react
 ```
 
+## 1.2. ReactアプリにAmplifyのAWSリソースを追加
+
 `react-amplify/src/index.tsx`を修正する。
 
-```jsx
+```ts
 // index.tsx
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -29,9 +33,11 @@ ReactDOM.render(
 reportWebVitals();
 ```
 
+## 1.3. 認証用コンポーネントの追加
+
 `react-amplify/src/App.tsx`を修正する。
 
-```jsx
+```ts
 import logo from './logo.svg';
 import './App.css';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
@@ -51,7 +57,9 @@ function App() {
 export default withAuthenticator(App);
 ```
 
-ここまで修正したら`yarn start`で起動しましょう。`http://localhost:3000/`でアクセスすると以下の画面が表示されます。<br>画面内の**Create account**からアカウントを作成します。
+## 1.4. 認証画面の動作確認とログインユーザー作成
+
+ここまで修正したら`yarn start`で起動しましょう。`http://localhost:3000/`でアクセスすると以下の画面が表示されます。画面内の**Create account**からアカウントを作成します。
 
 ![](./img/2021-05-06-06-37-41.png)
 

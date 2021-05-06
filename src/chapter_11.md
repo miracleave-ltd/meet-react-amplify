@@ -1,4 +1,10 @@
-# 11. Amplifyの認証画面を日本語化する
+# 1. Amplifyの認証画面を修正する
+
+## 1.1. 画面レイアウトを修正する
+
+追加と修正を行うファイルは下図の赤枠が対象です。
+
+![](./img/2021-05-06-10-30-52.png)
 
 ここでは，Amplifyで提供されているコンポーネントを日本語化し，ログイン後の画面を簡素ですが少しだけ変更する，という事を進めます。本当に簡易的なレイアウト追加なので付録的な内容だと思っていただければと思います。最終的には以下の画面になります。
 
@@ -8,6 +14,7 @@
 ログイン後
 ![](./img/2021-05-06-09-55-42.png)
 
+## 1.2. Semantic UI Reactの追加
 
 semantic-uiをインストールします（長いです）。インストールが完了したら次へ進みます。
 
@@ -15,9 +22,7 @@ semantic-uiをインストールします（長いです）。インストール
 $ npm install semantic-ui-react semantic-ui-css
 ```
 
-追加と修正を行うファイルは下図の赤枠が対象です。
-
-![](./img/2021-05-06-10-30-52.png)
+## 1.3. Amplifyの認証画面を日本語化
 
 日本語化用のファイルを作成します。
 
@@ -79,6 +84,36 @@ export const localization = {
 };
 ```
 
+日本語化の内容を適用するために`index.tsx`を修正します。
+
+```ts
+// index.tsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import Amplify, { I18n } from 'aws-amplify';
+import { localization } from './assets/i18n/amplify/localization';
+import config from './aws-exports';
+Amplify.configure(config);
+
+I18n.putVocabularies(localization);
+I18n.setLanguage('ja');
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+reportWebVitals();
+```
+
+
+## 1.4. ログイン後の画面レイアウトを修正
+
 ログイン後のコンポーネントを作成します。
 
 `react-amplify/src/layout`フォルダを作成します。このフォルダ配下に`NavBar.tsx`と`DemoContent.tsx`を追加していきます。<br>まず，`NavBar.tsx`を追加します。これは`App.tsx`で渡ってくるログインしたユーザー名を受け取りますが，この時点ではこのまま書いてもエラーが出ると思いますが，最後の`App.tsx`まで修正すると解消するので一旦は無視しましょう。
@@ -113,7 +148,6 @@ type NavProps = {
 }
 export default NavBar;
 ```
-
 
 `DemoContent.tsx`を追加。あくまで飾り程度の残念コンポーネントです。こちらは何も動的な動作をしないので，特にエラーは起こりません。
 
@@ -203,32 +237,7 @@ export default function DemoContent() {
 }
 ```
 
-日本語化の内容を適用するために`index.tsx`を修正します。
 
-```ts
-// index.tsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import Amplify, { I18n } from 'aws-amplify';
-import { localization } from './assets/i18n/amplify/localization';
-import config from './aws-exports';
-Amplify.configure(config);
-
-I18n.putVocabularies(localization);
-I18n.setLanguage('ja');
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-reportWebVitals();
-```
 
 ログイン時と非ログイン時の出し分けと，ユーザー名を`NavBar`コンポーネントに渡すくらいしかしていませんが，最後に`App.tsx`を修正します。
 
@@ -265,4 +274,4 @@ const App = () => {
 export default App;
 ```
 
-これでざっくりと画面レイアウトを変更出来たので，完了となります。AmplifyのコンポーネントやらAPIもかなり用意されているようですが，これを使いこなすのはなかなか大変ですね。<br>これにて「mirameet vol.16」のハンズオンは終了となります。ご参加いただいた方，お疲れ様でした。
+これでざっくりと画面レイアウトを変更出来たので，完了となります。認証機能がこれだけ簡単に実装出来るとは...という驚きが多いAmplifyでした。AmplifyコンポーネントやらAPIもかなり用意されているようですが，これを使いこなすのはなかなか骨は折れそうです。<br>これにて「mirameet vol.16」のハンズオンは終了となります。ご参加いただいた方，お疲れ様でした。
