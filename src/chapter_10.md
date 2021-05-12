@@ -84,7 +84,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import Amplify, { I18n } from 'aws-amplify';
 import { localization } from './assets/i18n/amplify/localization';
 import config from './aws-exports';
@@ -99,8 +98,6 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-reportWebVitals();
 ```
 
 
