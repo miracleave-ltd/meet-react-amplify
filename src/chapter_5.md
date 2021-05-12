@@ -1,58 +1,84 @@
-# 1. 自動デプロイ(CI/CD)の確認
+# 5. Amplifyのユーザー作成
 
-## 1.1. プログラムの修正
+## 5.1. Amplifyプロジェクトを操作するアカウントの設定
 
-`react-amplify/src/App.tsx`ファイルを修正して自動デプロイが有効になっているかを確認していきます。下図の通り，修正します。
+Dockerコンテナに入った状態で実施していきます。Amplifyの設定をしますが以下コマンド実行後は設問となるので注意して下さい。
 
-![](./img/2021-05-06-01-19-44.png)
-
-コードは以下です。
-
-```jsx
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello Amplify!!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+```sh
+# まずはこのコマンドを実行つ
+amplify configure
 ```
 
-## 1.2. Amplifyの自動デプロイ確認
+以降ターミナル上で設問が始まるので注意。以降は設問毎に表題を分割しています。
 
-変更したらプッシュします。
+```sh
+# amplify configureのコマンド実行直後
+Initializing new Amplify CLI version...
+Done initializing new version.
+Scanning for plugins...
+Plugin scan successful
+Follow these steps to set up access to your AWS account:
 
+Sign in to your AWS administrator account:
+https://console.aws.amazon.com/
+Press Enter to continue # ここはEnterを押してOKです
 ```
-$ git add src/App.tsx
-$ git commit -m "change App.tsx"
-$ git push
+
+### 5.2. リージョンの選択
+```sh
+Specify the AWS Region
+# ap-northeast-1を選択し，Enter
+? region:  ap-northeast-1
 ```
 
-プッシュしたらAWSコンソールへ行き，確認します。mainブランチのプッシュを検知して自動デプロイがトリガーされているのがわかります。
+### 5.3. IAMユーザー名の入力
 
-![](./img/2021-05-06-01-28-50.png)
+```sh
+Specify the username of the new IAM user:
+# dev-amplifyと入力し，Enter
+? user name:  dev-amplify
+```
 
-修正箇所が反映されているのを確認出来たらOKです。
+### 5.4. AWSコンソール上でユーザーの確認
+```sh
+Complete the user creation using the AWS console
+https://console.aws.amazon.com/iam/home?region=ap-northeast-1#/users$new?step=final&accessKey&userNames=dev-amplify&permissionType=policies&policies=arn:aws:iam::aws:policy%2FAdministratorAccess
+# ご自身のURLが表示されるのでユーザの確認をします（下図を参照）
+```
 
-![](./img/2021-05-06-01-31-15.png)
+URLにアクセスすると下図の画面が表示されますので，ユーザー名を確認して次へ。
 
-次はAmplifyの設定を進めていきます。
+![](./img/2021-05-06-01-49-19.png)
+
+既存ポリシーはそのままで次へ。
+![](./img/2021-05-06-01-49-32.png)
+
+タグは得に設定せず次へ（設定したい方は設定しても可です）。
+![](./img/2021-05-06-01-49-44.png)
+
+ユーザー名，アクセス権限，タグの確認を行いユーザーの作成を選択します。
+![](./img/2021-05-06-01-49-53.png)
+
+ユーザーが追加されるのでアクセスキーID，シークレットアクセスキーをコピーし，控えておいて下さい。<br>csvのダウンロードでも可です。
+![](./img/2021-05-06-01-50-01.png)
+
+### 5.5. アクセスキー情報の入力
+```sh
+Press Enter to continue　# ←Enterを押してキー情報入力
+Enter the access key of the newly created user:
+# 前項で控えたアクセスキーIDをコピペしてEnter
+? accessKeyId:  ********************
+# 前項で控えたシークレットアクセスキーをコピペしてEnter
+? secretAccessKey:  ****************************************
+```
+
+### 5.6. プロファイル名の選択
+```sh
+This would update/create the AWS Profile in your local machine
+# デフォルトを選択しEnter
+? Profile Name:  default
+# 完了すると表示される
+Successfully set up the new user.
+```
+
+これでawsフォルダ配下にIAMユーザーのプロファイルが生成されます。 次はAmplifyプロジェクトの作成を行います。

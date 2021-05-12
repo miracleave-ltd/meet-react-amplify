@@ -1,38 +1,65 @@
-# 1. Amplifyの認証サービスを追加する
+# 8. Reactアプリに認証機能を追加する
 
-## 1.1. AmplifyのAuth機能を追加
+## 8.1. ReactアプリにAmplifyのAWSリソースを追加
 
-こちらも前項と同じく，以下コマンド実行を行いますが，同じように設問となるので注意して下さい。
+`react-amplify/src/index.tsx`を修正する。
 
-```sh
-$ amplify add auth
-Using service: Cognito, provided by: awscloudformation
- 
- The current configured provider is Amazon Cognito. 
- # Default configurationを選択する
- Do you want to use the default authentication and security configuration? Default config
-uration
- Warning: you will not be able to edit these selections. 
- # Usernameを選択
- How do you want users to be able to sign in? Username
- # No, I am done.を選択
- Do you want to configure advanced settings? No, I am done.
+```ts
+// index.tsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import Amplify from 'aws-amplify';
+import config from './aws-exports';
+Amplify.configure(config);
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 ```
 
-**Successfully**まで表示されたら，追加したauthをデプロイします。数分かかるので待ちます。
+## 8.2. 認証用コンポーネントの追加
 
-```sh
-$ amplify push --y
+`react-amplify/src/App.tsx`を修正する。
+
+```ts
+import logo from './logo.svg';
+import './App.css';
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
+
+function App() {
+  return (
+    <div className="App">
+      <header>
+        <img src={logo} className="App-logo" alt="logo" />
+        <h1>Hello Amplify!!</h1>
+      </header>
+      <AmplifySignOut />
+    </div>
+  );
+}
+
+export default withAuthenticator(App);
 ```
 
-## 1.2. AWSコンソールで認証アプリを確認
+## 8.4. 認証画面の動作確認とログインユーザー作成
 
-完了すると`reactamplify`の認証アプリが作成されます。以下のコマンドでAWSコンソール上でも確認出来ます。
+ここまで修正したら`yarn start`で起動しましょう。`http://localhost:3000/`でアクセスすると以下の画面が表示されます。画面内の**Create account**からアカウントを作成します。
 
-```sh
-$ amplify console
-# Consoleを選択 
-✔ Which site do you want to open? · Console
-```
+![](./img/2021-05-06-06-37-41.png)
 
-次はReactアプリへ認証機能を追加していきます。
+アカウントの作成画面に移動するので，作成します。次の画面で確認コードを入力する必要があるので，**有効なメールアドレス**を入力して下さい。
+
+![](./img/2021-05-06-06-43-41.png)
+
+![](./img/2021-05-06-06-46-07.png)
+
+送られてきたメールの確認コードを入力するとログイン出来ます。
+
+![](./img/2021-05-06-06-47-32.png)
+
+この時点での成果をプッシュしていき，自動デプロイの結果も確認したいところですが，AWSコンソール上でAmplifyの設定を更新する箇所がありますので次項で進めます。

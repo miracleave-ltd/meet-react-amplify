@@ -1,43 +1,46 @@
-# 1. Amplifyでデプロイ
+# 4. 自動デプロイ(CI/CD)の確認
 
-AWSコンソールにサインインし，Amplifyサービスを検索，選択します。
+## 4.1. プログラムの修正
 
-## 1.1. Amplifyサービスの選択
+`react-amplify/src/App.tsx`ファイルを修正して自動デプロイが有効になっているかを確認していきます。プログラムを下記の通り，VS Code上で修正します。
 
-![](./img/2021-05-06-00-49-35.png)
+```jsx
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 
-Amplifyのサービス画面に移動したらページ下部のDeliverのGet startedを選択します。
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Hello Amplify!!
+        </p>
+      </header>
+    </div>
+  );
+}
 
-![](./img/2021-05-06-00-53-19.png)
+export default App;
+```
 
-## 1.2. AmplifyとGitHubの連携
+## 4.2. Amplifyの自動デプロイ確認
 
-GitHubを選択し，次へ進みます。
+変更したらプッシュします。
 
-![](./img/2021-05-06-00-56-16.png)
+```sh
+git add src/App.tsx
+git commit -m "change App.tsx"
+git push
+```
 
-GitHubの認証が必要なので完了させると以下のとおり，リポジトリと連携出来るようになります。<br>前項で作成したリポジトリの`react-amplify`を選択し，**次へ**を選択します。
+プッシュしたらAWSコンソールへ行き，確認します。mainブランチのプッシュを検知して自動デプロイがトリガーされているのがわかります。
 
-![](./img/2021-05-06-00-58-58.png)
+![](./img/2021-05-06-01-28-50.png)
 
-## 1.3. Amplifyの自動ビルド設定とデプロイ
+修正箇所が反映されているのを確認出来たらOKです。
 
-ビルド設定の構成ではデフォルトのまま，**次へ**を選択します。
+![](./img/2021-05-06-01-31-15.png)
 
-![](./img/2021-05-06-01-07-18.png)
-
-確認まで進んだら**保存してデプロイ**を選択します。
-
-![](./img/2021-05-06-01-09-10.png)
-
-Amplifyによって自動でビルドされ、アプリが公開されますが**検証**まで完了するのは少し時間がかかります。下図の赤枠部から公開されたページに飛べます。
-
-![](./img/2021-05-06-01-13-13.png)
-
-## 1.4. デプロイされたReactアプリの確認
-
-完了すると「2. Reactアプリ作成」で最後に確認した同じ画面が表示されます。
-
-![](./img/2021-05-05-23-42-02.png)
-
-次はReactのコードを変更して，自動デプロイが出来るようになっているか確認していきます。
+次はAmplifyの設定を進めていきます。

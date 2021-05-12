@@ -1,58 +1,73 @@
-# 1. Amplifyのユーザー作成
+# 6. Amplifyプロジェクトの作成
 
-## 1.1. Amplifyプロジェクトを操作するアカウントの設定
+## 6.1. Amplifyプロジェクトの初期化
 
-Dockerコンテナに入った状態で実施していきます。Amplifyの設定をしますが以下コマンド実行後は設問となるので注意して下さい。
+引き続きDockerコンテナに入った状態で実施していきます。こちらも前項と同じく，以下コマンド実行後は設問となるので注意して下さい。
 
 ```sh
-$ amplify configure
-Initializing new Amplify CLI version...
-Done initializing new version.
-Scanning for plugins...
-Plugin scan successful
-Follow these steps to set up access to your AWS account:
-
-Sign in to your AWS administrator account:
-https://console.aws.amazon.com/
-Press Enter to continue
-# Enterを押してOKです
-Specify the AWS Region
-# 以下を選択しましょう
-? region:  ap-northeast-1
-Specify the username of the new IAM user:
-# dev-amplifyとします
-? user name:  dev-amplify
-Complete the user creation using the AWS console
-https://console.aws.amazon.com/iam/home?region=ap-northeast-1#/users$new?step=final&accessKey&userNames=dev-amplify&permissionType=policies&policies=arn:aws:iam::aws:policy%2FAdministratorAccess
-Press Enter to continue
-# 上記URLにアクセスしてユーザの確認をします（下図を参照）
-Enter the access key of the newly created user:
-# 画像内のアクセスキーIDをコピペします
-? accessKeyId:  ********************
-# 画像内のシークレットアクセスキーをコピペします
-? secretAccessKey:  ****************************************
-This would update/create the AWS Profile in your local machine
-# デフォルトを選択します
-? Profile Name:  default
-
-Successfully set up the new user.
+# まずは以下を実行
+amplify init
 ```
 
-これでawsフォルダ配下にIAMのプロファイルが生成されます。
+## 6.2. 初期化するプロジェクト構成の選択
+```sh
+# amplify initのコマンド実行直後
+Note: It is recommended to run this command from the root of your app directory
+? Enter a name for the project reactamplify # ←Enterを押します
+```
 
-## 1.2. IAMユーザーの作成
+```sh
+The following configuration will be applied:
 
-コンソール内のURLにアクセスすると以下の画面が表示されますので，ユーザー名を確認して次へ。
-![](./img/2021-05-06-01-49-19.png)
+Project information
+| Name: reactamplify
+| Environment: dev
+| Default editor: Visual Studio Code
+| App type: javascript
+| Javascript framework: react
+| Source Directory Path: src
+| Distribution Directory Path: build
+| Build Command: npm run-script build
+| Start Command: npm run-script start
+# Yを入力
+? Initialize the project with the above configuration? Yes
+Using default provider  awscloudformation
+```
 
-既存ポリシーはそのままで次へ。
-![](./img/2021-05-06-01-49-32.png)
+## 6.3. 認証方法の種類を選択
 
-タグは得に設定せず次へ（設定したい方は設定しても可です）。
-![](./img/2021-05-06-01-49-44.png)
+```sh
+# AWS profileを選択
+? Select the authentication method you want to use: AWS profile
 
-ユーザー名，アクセス権限，タグの確認を行いユーザーの作成を選択します。
-![](./img/2021-05-06-01-49-53.png)
+For more information on AWS Profiles, see:
+https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
+```
 
-ユーザーが追加されるのでアクセスキーID，シークレットアクセスキーを控えて下さい。<br>csvのダウンロードでも可です。
-![](./img/2021-05-06-01-50-01.png)
+## 6.4. 使用するプロファイルを選択
+
+```sh
+# defaultを選択
+? Please choose the profile you want to use default
+Adding backend environment dev to AWS Amplify Console app: d2nvyvjheogdaz
+⠇ Initializing project in the cloud...
+
+# 途中略，少し待つ
+✔ Successfully created initial AWS cloud resources for deployments.
+✔ Initialized provider successfully.
+Initialized your environment successfully.
+
+Your project has been successfully initialized and connected to the cloud!
+
+Some next steps:
+"amplify status" will show you what you've added already and if it's locally configured or deployed
+"amplify add <category>" will allow you to add features like user login or a backend API
+"amplify push" will build all your local backend resources and provision it in the cloud
+"amplify console" to open the Amplify Console and view your project status
+"amplify publish" will build all your local backend and frontend resources (if you have hosting category added) and provision it in the cloud
+
+Pro tip:
+Try "amplify add api" to create a backend API and then "amplify publish" to deploy everything
+```
+
+これで完了です。`react-amplify`の配下に`amplify`フォルダが作成されました。<br>次はAmplifyの認証サービスを追加します。
