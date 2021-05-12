@@ -10,7 +10,7 @@ Dockerで作成していきます。プログラム変更時のエディタはVS
 clone先はdockerコマンドが動作するご自身の環境に合わせてください。
 
 ```sh
-git clone https://github.com/Tanabebe/amplify-demo.git
+git clone https://github.com/Tanabebe/amplify-demo.git && cd amplify-demo
 ```
 
 cloneしたらVS Codeで上記のフォルダを開きます。開いたら下図のように「ターミナル」→「新しいターミナル」を選択し，ペイン上に表示させます。
@@ -55,7 +55,7 @@ docker cp amplify-demo_amplify_1:/amplify-demo/react-app/node_modules react-app/
 
 ```csharp
 # docker exec -it {コンテナ名} bash 
-docker exec -it demo_amplify_1 bash
+docker exec -it amplify-demo_amplify_1 bash
 ```
 
 ## 1.4. 事前準備の最終確認
