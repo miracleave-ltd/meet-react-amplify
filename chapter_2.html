@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>02. Reactアプリ作成</title>
+        <title>02. GitHubにpushする</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html" class="active"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> 自動デプロイの設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">11.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html" class="active"><strong aria-hidden="true">2.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> 自動デプロイの設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,20 +163,28 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#1-reactアプリ作成" id="1-reactアプリ作成">1. Reactアプリ作成</a></h1>
-<h2><a class="header" href="#11-create-react-appでreact-x-typescript環境構築" id="11-create-react-appでreact-x-typescript環境構築">1.1. create-react-appでReact x Typescript環境構築</a></h2>
-<p>早速作成していきます。</p>
-<pre><code class="language-sh">$ npx create-react-app react-amplify --template typescript
+                        <h1><a class="header" href="#2-githubにpushする" id="2-githubにpushする">2. GitHubにpushする</a></h1>
+<h2><a class="header" href="#21-githubに新規リポジトリ作成" id="21-githubに新規リポジトリ作成">2.1. GitHubに新規リポジトリ作成</a></h2>
+<p>ご自身のGitHubアカウントへアクセスし，新しくリポジトリを作成します。</p>
+<p><img src="./img/2021-05-05-23-52-17.png" alt="" /></p>
+<p>公開範囲は<strong>public</strong>でも<strong>private</strong>のどちらでもお好きな方を選択してください。</p>
+<p><img src="./img/2021-05-06-00-01-52.png" alt="" /></p>
+<h2><a class="header" href="#22-dockerコンテナからgithubへプッシュ" id="22-dockerコンテナからgithubへプッシュ">2.2. DockerコンテナからGitHubへプッシュ</a></h2>
+<p>リポジトリを作成したらコンテナ内で以下を実行します。<br>※メールアドレスとユーザー名は，GitHubのURLはご自身の環境に合わせて下さい。</p>
+<pre><code class="language-bash">git init
+# ※ご自身の環境に合わせて下さい
+git config --global user.email &quot;your-mailaddress@example.com&quot;
+git config --global user.name &quot;your name&quot;
+git add .
+git commit -m &quot;first commit&quot;
+git branch -M main
+# ※ご自身の環境に合わせて下さい
+git remote add origin https://github.com/{your name}/react-amplify.git
+git push -u origin main
 </code></pre>
-<p>しばらく時間がかかるので少し待ちましょう。</p>
-<h2><a class="header" href="#12-reactアプリの動作確認" id="12-reactアプリの動作確認">1.2. Reactアプリの動作確認</a></h2>
-<p><code>Happy hacking!</code>とコンソールに表示されたらReactアプリの起動を確認します。</p>
-<pre><code>$ cd react-amplify
-$ yarn start
-</code></pre>
-<p>以下の通り，画面が表示されたらOKです。</p>
-<p><img src="./img/2021-05-05-23-42-02.png" alt="" /></p>
-<p>次はGitHubへリポジトリを作成し，ここまでの内容をプッシュしていきます。</p>
+<p>以下の通り，反映されていればOKです。</p>
+<p><img src="./img/2021-05-06-00-31-53.png" alt="" /></p>
+<p>ここまで完了したらAWSコンソールからAmplifyを使用してデプロイします。</p>
 
                     </main>
 

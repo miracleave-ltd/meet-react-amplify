@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>05. 自動デプロイの確認</title>
+        <title>05. Amplifyのユーザー作成</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html" class="active"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> 自動デプロイの設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">11.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_5.html" class="active"><strong aria-hidden="true">5.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> 自動デプロイの設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,49 +163,65 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#1-自動デプロイcicdの確認" id="1-自動デプロイcicdの確認">1. 自動デプロイ(CI/CD)の確認</a></h1>
-<h2><a class="header" href="#11-プログラムの修正" id="11-プログラムの修正">1.1. プログラムの修正</a></h2>
-<p><code>react-amplify/src/App.tsx</code>ファイルを修正して自動デプロイが有効になっているかを確認していきます。下図の通り，修正します。</p>
-<p><img src="./img/2021-05-06-01-19-44.png" alt="" /></p>
-<p>コードは以下です。</p>
-<pre><code class="language-jsx">import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;header className=&quot;App-header&quot;&gt;
-        &lt;img src={logo} className=&quot;App-logo&quot; alt=&quot;logo&quot; /&gt;
-        &lt;p&gt;
-          Hello Amplify!!
-        &lt;/p&gt;
-        &lt;a
-          className=&quot;App-link&quot;
-          href=&quot;https://reactjs.org&quot;
-          target=&quot;_blank&quot;
-          rel=&quot;noopener noreferrer&quot;
-        &gt;
-          Learn React
-        &lt;/a&gt;
-      &lt;/header&gt;
-    &lt;/div&gt;
-  );
-}
-
-export default App;
+                        <h1><a class="header" href="#5-amplifyのユーザー作成" id="5-amplifyのユーザー作成">5. Amplifyのユーザー作成</a></h1>
+<h2><a class="header" href="#51-amplifyプロジェクトを操作するアカウントの設定" id="51-amplifyプロジェクトを操作するアカウントの設定">5.1. Amplifyプロジェクトを操作するアカウントの設定</a></h2>
+<p>Dockerコンテナに入った状態で実施していきます。Amplifyの設定をしますが以下コマンド実行後は設問となるので注意して下さい。</p>
+<pre><code class="language-sh"># まずはこのコマンドを実行つ
+amplify configure
 </code></pre>
-<h2><a class="header" href="#12-amplifyの自動デプロイ確認" id="12-amplifyの自動デプロイ確認">1.2. Amplifyの自動デプロイ確認</a></h2>
-<p>変更したらプッシュします。</p>
-<pre><code>$ git add src/App.tsx
-$ git commit -m &quot;change App.tsx&quot;
-$ git push
+<p>以降ターミナル上で設問が始まるので注意。以降は設問毎に表題を分割しています。</p>
+<pre><code class="language-sh"># amplify configureのコマンド実行直後
+Initializing new Amplify CLI version...
+Done initializing new version.
+Scanning for plugins...
+Plugin scan successful
+Follow these steps to set up access to your AWS account:
+
+Sign in to your AWS administrator account:
+https://console.aws.amazon.com/
+Press Enter to continue # ここはEnterを押してOKです
 </code></pre>
-<p>プッシュしたらAWSコンソールへ行き，確認します。mainブランチのプッシュを検知して自動デプロイがトリガーされているのがわかります。</p>
-<p><img src="./img/2021-05-06-01-28-50.png" alt="" /></p>
-<p>修正箇所が反映されているのを確認出来たらOKです。</p>
-<p><img src="./img/2021-05-06-01-31-15.png" alt="" /></p>
-<p>次はAmplifyの設定を進めていきます。</p>
+<h3><a class="header" href="#52-リージョンの選択" id="52-リージョンの選択">5.2. リージョンの選択</a></h3>
+<pre><code class="language-sh">Specify the AWS Region
+# ap-northeast-1を選択し，Enter
+? region:  ap-northeast-1
+</code></pre>
+<h3><a class="header" href="#53-iamユーザー名の入力" id="53-iamユーザー名の入力">5.3. IAMユーザー名の入力</a></h3>
+<pre><code class="language-sh">Specify the username of the new IAM user:
+# dev-amplifyと入力し，Enter
+? user name:  dev-amplify
+</code></pre>
+<h3><a class="header" href="#54-awsコンソール上でユーザーの確認" id="54-awsコンソール上でユーザーの確認">5.4. AWSコンソール上でユーザーの確認</a></h3>
+<pre><code class="language-sh">Complete the user creation using the AWS console
+https://console.aws.amazon.com/iam/home?region=ap-northeast-1#/users$new?step=final&amp;accessKey&amp;userNames=dev-amplify&amp;permissionType=policies&amp;policies=arn:aws:iam::aws:policy%2FAdministratorAccess
+# ご自身のURLが表示されるのでユーザの確認をします（下図を参照）
+</code></pre>
+<p>URLにアクセスすると下図の画面が表示されますので，ユーザー名を確認して次へ。</p>
+<p><img src="./img/2021-05-06-01-49-19.png" alt="" /></p>
+<p>既存ポリシーはそのままで次へ。
+<img src="./img/2021-05-06-01-49-32.png" alt="" /></p>
+<p>タグは得に設定せず次へ（設定したい方は設定しても可です）。
+<img src="./img/2021-05-06-01-49-44.png" alt="" /></p>
+<p>ユーザー名，アクセス権限，タグの確認を行いユーザーの作成を選択します。
+<img src="./img/2021-05-06-01-49-53.png" alt="" /></p>
+<p>ユーザーが追加されるのでアクセスキーID，シークレットアクセスキーをコピーし，控えておいて下さい。<br>csvのダウンロードでも可です。
+<img src="./img/2021-05-06-01-50-01.png" alt="" /></p>
+<h3><a class="header" href="#55-アクセスキー情報の入力" id="55-アクセスキー情報の入力">5.5. アクセスキー情報の入力</a></h3>
+<pre><code class="language-sh">Press Enter to continue　# ←Enterを押してキー情報入力
+Enter the access key of the newly created user:
+# 前項で控えたアクセスキーIDをコピペしてEnter
+? accessKeyId:  ********************
+# 前項で控えたシークレットアクセスキーをコピペしてEnter
+? secretAccessKey:  ****************************************
+</code></pre>
+<h3><a class="header" href="#56-プロファイル名の選択" id="56-プロファイル名の選択">5.6. プロファイル名の選択</a></h3>
+<pre><code class="language-sh">This would update/create the AWS Profile in your local machine
+# デフォルトを選択しEnter
+? Profile Name:  default
+# 完了すると表示される
+Successfully set up the new user.
+</code></pre>
+<p>これでawsフォルダ配下にIAMユーザーのプロファイルが生成されます。 次はAmplifyプロジェクトの作成を行います。</p>
 
                     </main>
 

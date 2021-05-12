@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html" class="active"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Reactアプリ作成</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> 自動デプロイの設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">11.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html" class="active"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> 自動デプロイの設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -165,71 +165,67 @@
                     <main>
                         <h1><a class="header" href="#1-環境作成" id="1-環境作成">1. 環境作成</a></h1>
 <h2><a class="header" href="#11-はじめに" id="11-はじめに">1.1. はじめに</a></h2>
-<p>Dockerで作成していきますが，最終的なプログラムは<a href="https://github.com/miracleave-ltd/meet-react-amplify/tree/main/amplify-demo">こちら</a>になります。<br>プログラム変更時のエディタはVS Codeを使用していますが，もちろんご自身が使いたいエディタで問題ありません。</p>
-<h2><a class="header" href="#12-ルートフォルダの作成" id="12-ルートフォルダの作成">1.2. ルートフォルダの作成</a></h2>
-<p>Dockerコンテナを使用するためのファイルを作成しますが，以下のフォルダ構成でルートとなる<code>amplify-demo</code>のフォルダを作成して下さい。</p>
-<pre><code class="language-sh"># Macの場合
-/Users/{ユーザー名}/Projects/amplify-demo
-├── Dockerfile
-└── docker-compose.yml
-
-# Windowsの場合
-C:¥Useres¥{ユーザー名}¥Projects/amplify-demo
-├── Dockerfile
-└── docker-compose.yml
+<p>Dockerで作成していきます。プログラム変更時のエディタはVS Codeを使用していますが，ご自身が使いたいエディタで問題ありません。</p>
+<h2><a class="header" href="#12-作業リポジトリのclone" id="12-作業リポジトリのclone">1.2. 作業リポジトリのclone</a></h2>
+<p>作業用ディレクトリとなるプログラムをcloneします。
+clone先はdockerコマンドが動作するご自身の環境に合わせてください。</p>
+<pre><code class="language-sh">git clone https://github.com/Tanabebe/amplify-demo.git
 </code></pre>
-<h2><a class="header" href="#13-docker起動用のファイルを作成" id="13-docker起動用のファイルを作成">1.3. Docker起動用のファイルを作成</a></h2>
-<p>上記フォルダを作成したら配下に<a href="https://github.com/miracleave-ltd/meet-react-amplify/blob/main/amplify-demo/Dockerfile"><code>docker-compose.yml</code></a>と<a href="https://github.com/miracleave-ltd/meet-react-amplify/blob/main/amplify-demo/docker-compose.yml"><code>Dockerfile</code></a>を用意します。<br><a href="https://github.com/miracleave-ltd/meet-react-amplify/blob/main/amplify-demo/Dockerfile"><code>docker-compose.yml</code></a>は以下の通り。</p>
-<pre><code class="language-yml">version: '3'
-
-services:
-    amplify:
-        build: ./
-        ports:
-            - &quot;3000:3000&quot;
-            - &quot;3001:3001&quot;
-        volumes:
-            - ./:/var/www/amplify-demo/
-            - ./aws/:/root/.aws/
-        tty: true
+<p>cloneしたらVS Codeで上記のフォルダを開きます。開いたら下図のように「ターミナル」→「新しいターミナル」を選択し，ペイン上に表示させます。</p>
+<p><img src="./img/2021-05-12-10-44-52.png" alt="" />
+<img src="./img/2021-05-12-10-47-59.png" alt="" /></p>
+<p>※デフォルトシェルは環境によって違うのですが，<code>bash</code>や<code>zsh</code>などdockerコマンドが通るシェルであれば問題ないです。</p>
+<h2><a class="header" href="#13-dockerの起動" id="13-dockerの起動">1.3. Dockerの起動</a></h2>
+<p>以下のコマンドを実行して，コンテナを起動します。<code>Creating amplify-demo_amplify_1 ... done</code>とターミナルに表示されればOKです。</p>
+<pre><code class="language-sh">docker-compose up -d
 </code></pre>
-<p><a href="https://github.com/miracleave-ltd/meet-react-amplify/blob/main/amplify-demo/docker-compose.yml"><code>Dockerfile</code></a>は以下の通り。</p>
-<pre><code class="language-sh">FROM node:14.16.1
-
-# amplify CLIをインストールする
-RUN npm install -g @aws-amplify/cli
-
-WORKDIR /var/www/amplify-demo
+<p>※PC性能，回線状況により異なりますが，大体5分程度でした。</p>
+<p>起動出来たら念の為，コンテナ名と起動状態の確認を行います。以下の例だと<code>amplify-demo_amplify_1</code>がコンテナ名です。</p>
+<pre><code class="language-sh">docker-compose ps
 </code></pre>
-<h2><a class="header" href="#14-dockerの起動とコンテナでの作業" id="14-dockerの起動とコンテナでの作業">1.4. Dockerの起動とコンテナでの作業</a></h2>
-<p>作成したファイルを使用してDockerを起動します。</p>
-<pre><code>$ docker-compose up -d
+<p>以下のように，<strong>Name</strong>と表示されている箇所がコンテナ名です。</p>
+<pre><code>         Name                     Command            State                       Ports                     
+-----------------------------------------------------------------------------------------------------------
+amplify-demo_amplify_1   docker-entrypoint.sh node   Up      0.0.0.0:3000-&gt;3000/tcp, 0.0.0.0:3001-&gt;3001/tcp
 </code></pre>
-<p>立ち上がったらコンテナの中に入っていきますが，念の為，起動状態の確認とコンテナ名の確認を行います。以下の例だと<code>amplify-demo_amplify_1</code>がコンテナ名です。</p>
-<pre><code class="language-sh">$ docker-compose ps
-         Name                     Command            State              Ports            
------------------------------------------------------------------------------------------
-amplify-demo_amplify_1   docker-entrypoint.sh node   Up      0.0.0.0:8080-&gt;8080/tcp,     
-                                                             0.0.0.0:8081-&gt;8081/tcp 
+<p>コンテナ起動は問題ないですが，コンテナ側の<code>node_modules</code>はホスト側にマウントしていないため，以降のプログラム修正時に都合が悪いです。無理やり感はありますが，手動でコピーします。</p>
+<pre><code class="language-csharp"># docker cp コンテナ名:/amplify-demo/react-app/node_modules react-app/
+docker cp amplify-demo_amplify_1:/amplify-demo/react-app/node_modules react-app/
 </code></pre>
-<p>コンテナ名が確認出来たら，コンテナに入ります。</p>
-<pre><code>$ docker exec -it {コンテナ名(上記のName)} bash
+<p>コピーが終わったらコンテナの中に入っていきます。</p>
+<pre><code class="language-csharp"># docker exec -it {コンテナ名} bash 
+docker exec -it demo_amplify_1 bash
 </code></pre>
-<h2><a class="header" href="#15-事前準備の最終確認" id="15-事前準備の最終確認">1.5. 事前準備の最終確認</a></h2>
-<p>念の為，<code>node</code>と<code>npm</code>のバージョンを確認します。</p>
-<pre><code class="language-sh">$ node -v &amp;&amp; npm -v
-v14.16.1
+<h2><a class="header" href="#14-事前準備の最終確認" id="14-事前準備の最終確認">1.4. 事前準備の最終確認</a></h2>
+<p>コンテナの中に入ったら念の為，<code>node</code>と<code>npm</code>のバージョン，<code>amplify</code>がインストールされているか確認します。</p>
+<pre><code class="language-sh">node -v &amp;&amp; npm -v &amp;&amp; amplify --version
+</code></pre>
+<p>下記のように表示されたらOKです。</p>
+<pre><code class="language-sh">v14.16.1
 6.14.12
-</code></pre>
-<p>さらに<code>amplify</code>もインストール出来ているか確認します。</p>
-<pre><code class="language-sh">$ amplify --version
 Initializing new Amplify CLI version...
 Done initializing new version.
 Scanning for plugins...
 Plugin scan successful
 4.50.2
 </code></pre>
-<p>要件を満たせているので，Reactアプリの作成をしていきます。</p>
+<p>最後にReactアプリが動作するか確認します。</p>
+<pre><code class="language-sh">yarn start
+</code></pre>
+<p>以下のようにコンソールに表示されたら<code>http://localhost:3000</code>にアクセスしましょう。</p>
+<pre><code class="language-csharp">Compiled successfully!
+
+You can now view react-app in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://172.22.0.2:3000
+
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+</code></pre>
+<p>アクセスしたら下図の画面が表示されたらOKです。ターミナル上で<code>ctrl + c</code>でサーバーを一旦停止させます。</p>
+<p><img src="./img/2021-05-05-23-42-02.png" alt="" /></p>
+<p>次はGitHubへリポジトリを作成し，コンテナの中に入ったまま起動確認したReactアプリをあげていきます。</p>
 
                     </main>
 
