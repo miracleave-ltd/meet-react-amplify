@@ -169,7 +169,7 @@
 <h2><a class="header" href="#12-作業リポジトリのclone" id="12-作業リポジトリのclone">1.2. 作業リポジトリのclone</a></h2>
 <p>作業用ディレクトリとなるプログラムをcloneします。
 clone先はdockerコマンドが動作するご自身の環境に合わせてください。</p>
-<pre><code class="language-sh">git clone https://github.com/Tanabebe/amplify-demo.git
+<pre><code class="language-sh">git clone https://github.com/Tanabebe/amplify-demo.git &amp;&amp; cd amplify-demo
 </code></pre>
 <p>cloneしたらVS Codeで上記のフォルダを開きます。開いたら下図のように「ターミナル」→「新しいターミナル」を選択し，ペイン上に表示させます。</p>
 <p><img src="./img/2021-05-12-10-44-52.png" alt="" />
@@ -194,7 +194,7 @@ docker cp amplify-demo_amplify_1:/amplify-demo/react-app/node_modules react-app/
 </code></pre>
 <p>コピーが終わったらコンテナの中に入っていきます。</p>
 <pre><code class="language-csharp"># docker exec -it {コンテナ名} bash 
-docker exec -it demo_amplify_1 bash
+docker exec -it amplify-demo_amplify_1 bash
 </code></pre>
 <h2><a class="header" href="#14-事前準備の最終確認" id="14-事前準備の最終確認">1.4. 事前準備の最終確認</a></h2>
 <p>コンテナの中に入ったら念の為，<code>node</code>と<code>npm</code>のバージョン，<code>amplify</code>がインストールされているか確認します。</p>
