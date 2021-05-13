@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>08. Reactアプリに認証機能を追加する</title>
+        <title>08. 自動デプロイ(CI/CD)の確認と設定変更</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> GitHubにpushする</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Amplifyプロジェクトの設定</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> 自動デプロイの確認</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyプロジェクトの作成</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Amplifyの認証サービスを追加する</a></li><li class="chapter-item expanded "><a href="chapter_8.html" class="active"><strong aria-hidden="true">8.</strong> Reactアプリに認証機能を追加する</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> 自動デプロイの設定を変更</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> GitHubにpush</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Amplifyでデプロイ</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Amplifyのプロジェクト作成</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyの認証サービス追加</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Reactアプリに認証機能追加</a></li><li class="chapter-item expanded "><a href="chapter_8.html" class="active"><strong aria-hidden="true">8.</strong> 自動デプロイ(CI/CD)の確認と設定変更</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -163,54 +163,50 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#8-reactアプリに認証機能を追加する" id="8-reactアプリに認証機能を追加する">8. Reactアプリに認証機能を追加する</a></h1>
-<h2><a class="header" href="#81-reactアプリにamplifyのawsリソースを追加" id="81-reactアプリにamplifyのawsリソースを追加">8.1. ReactアプリにAmplifyのAWSリソースを追加</a></h2>
-<p><code>react-amplify/src/index.tsx</code>を修正する。</p>
-<pre><code class="language-ts">// index.tsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import Amplify from 'aws-amplify';
-import config from './aws-exports';
-Amplify.configure(config);
-
-ReactDOM.render(
-  &lt;React.StrictMode&gt;
-    &lt;App /&gt;
-  &lt;/React.StrictMode&gt;,
-  document.getElementById('root')
-);
+                        <h1><a class="header" href="#8-自動デプロイcicdの確認と設定変更" id="8-自動デプロイcicdの確認と設定変更">8. 自動デプロイ(CI/CD)の確認と設定変更</a></h1>
+<h2><a class="header" href="#81-なぜ設定を変更するのか" id="81-なぜ設定を変更するのか">8.1. なぜ設定を変更するのか</a></h2>
+<p>実は<code>.gitignore</code>に<code>aws-exports.js</code>が含まれてしまっているため，このままだとフロントエンドのビルドで<strong>aws-exports.jsファイルが見つからない</strong>というエラーが発生します。<br>試しに前項からGitへプッシュするとデプロイで失敗となります（試しても試さなくても構いません）。AWSコンソール上でこの問題を解決していきます。</p>
+<h2><a class="header" href="#82-環境変数の追加" id="82-環境変数の追加">8.2. 環境変数の追加</a></h2>
+<p>AWSコンソールへアクセスし，Amplifyの環境変数を更新します。</p>
+<p>以下のように<code>aws-exports.js</code>に書いてあるプログラム(<code>const</code>部から全てコピー）をコピーします。こちらが環境変数の値となります。変数名は<code>secretfile</code>としています。</p>
+<p><img src="./img/2021-05-06-09-33-15.png" alt="" /></p>
+<h2><a class="header" href="#83-ビルド設定の追加" id="83-ビルド設定の追加">8.3. ビルド設定の追加</a></h2>
+<p>次はビルド設定を更新します。下図のとおりビルド設定に一行追加します。AWSコンソール上で修正してOKです。</p>
+<p><img src="./img/2021-05-06-09-40-25.png" alt="" /></p>
+<p>プログラムは以下となります。</p>
+<pre><code class="language-yml">version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # 追加
+        - echo $secretfile &gt; ./src/aws-exports.js
+        - yarn install
+    build:
+      commands:
+        - yarn run build
+  artifacts:
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
 </code></pre>
-<h2><a class="header" href="#82-認証用コンポーネントの追加" id="82-認証用コンポーネントの追加">8.2. 認証用コンポーネントの追加</a></h2>
-<p><code>react-amplify/src/App.tsx</code>を修正する。</p>
-<pre><code class="language-ts">import logo from './logo.svg';
-import './App.css';
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
-
-function App() {
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;header&gt;
-        &lt;img src={logo} className=&quot;App-logo&quot; alt=&quot;logo&quot; /&gt;
-        &lt;h1&gt;Hello Amplify!!&lt;/h1&gt;
-      &lt;/header&gt;
-      &lt;AmplifySignOut /&gt;
-    &lt;/div&gt;
-  );
-}
-
-export default withAuthenticator(App);
+<h2><a class="header" href="#84-自動デプロイが成功するか確認" id="84-自動デプロイが成功するか確認">8.4. 自動デプロイが成功するか確認</a></h2>
+<p>変更したコードをプッシュします。</p>
+<pre><code class="language-csharp">git add .
+# コメントはお好きなように
+git commit -m &quot;modified amplify auth add.&quot;
+git push
 </code></pre>
-<h2><a class="header" href="#84-認証画面の動作確認とログインユーザー作成" id="84-認証画面の動作確認とログインユーザー作成">8.4. 認証画面の動作確認とログインユーザー作成</a></h2>
-<p>ここまで修正したら<code>yarn start</code>で起動しましょう。<code>http://localhost:3000/</code>でアクセスすると以下の画面が表示されます。画面内の<strong>Create account</strong>からアカウントを作成します。</p>
-<p><img src="./img/2021-05-06-06-37-41.png" alt="" /></p>
-<p>アカウントの作成画面に移動するので，作成します。次の画面で確認コードを入力する必要があるので，<strong>有効なメールアドレス</strong>を入力して下さい。</p>
-<p><img src="./img/2021-05-06-06-43-41.png" alt="" /></p>
-<p><img src="./img/2021-05-06-06-46-07.png" alt="" /></p>
-<p>送られてきたメールの確認コードを入力するとログイン出来ます。</p>
-<p><img src="./img/2021-05-06-06-47-32.png" alt="" /></p>
-<p>この時点での成果をプッシュしていき，自動デプロイの結果も確認したいところですが，AWSコンソール上でAmplifyの設定を更新する箇所がありますので次項で進めます。</p>
+<p>しばらくすると自動デプロイの正常完了が確認出来ます。</p>
+<p><img src="./img/2021-05-06-09-46-16.png" alt="" /></p>
+<h2><a class="header" href="#ex-コードを変更しない場合の手動デプロイ再デプロイ方法について" id="ex-コードを変更しない場合の手動デプロイ再デプロイ方法について">ex. コードを変更しない場合の手動デプロイ（再デプロイ）方法について</a></h2>
+<p>もし，デプロイ時の試している方は以下からGitプッシュを行わなくても再デプロイが可能です。赤枠部はリンクになっているので飛んだ先で手動での再デプロイが可能です。</p>
+<p><img src="./img/2021-05-06-09-50-03.png" alt="" /></p>
+<p><img src="./img/2021-05-06-09-49-32.png" alt="" /></p>
+<p>ここまでで完了です。お疲れ様でした。<br>とはいえ今のままでは若干見た目も微妙なので，まだ時間に余力があれば次項を進めてください。</p>
 
                     </main>
 
