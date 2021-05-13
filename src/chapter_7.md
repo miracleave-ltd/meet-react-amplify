@@ -1,51 +1,65 @@
-# 7. Amplifyの認証サービスを追加する
+# 7. Reactアプリに認証機能追加
 
-## 7.1. AmplifyのAuth機能を追加
+## 7.1. ReactアプリにAmplifyのAWSリソースを追加
 
-こちらも前項と同じく，以下コマンド実行を行いますが，同じように設問となるので注意して下さい。
+`react-amplify/src/index.tsx`を修正する。
 
-```csharp
-# 以下のコマンドを実行
-amplify add auth
+```ts
+// index.tsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import Amplify from 'aws-amplify';
+import config from './aws-exports';
+Amplify.configure(config);
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 ```
 
-## 7.2 認証・セキュリティ構成の選択
-```csharp
-# amplify add authの実行直後
-Using service: Cognito, provided by: awscloudformation
- 
-The current configured provider is Amazon Cognito. 
-# Default configurationを選択する
-Do you want to use the default authentication and security configuration? Default config
-uration
-Warning: you will not be able to edit these selections. 
+## 7.2. 認証用コンポーネントの追加
+
+`react-amplify/src/App.tsx`を修正する。
+
+```ts
+import logo from './logo.svg';
+import './App.css';
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
+
+function App() {
+  return (
+    <div className="App">
+      <header>
+        <img src={logo} className="App-logo" alt="logo" />
+        <h1>Hello Amplify!!</h1>
+      </header>
+      <AmplifySignOut />
+    </div>
+  );
+}
+
+export default withAuthenticator(App);
 ```
 
-## 7.3 ユーザーのログイン方法の選択 
+## 7.4. 認証画面の動作確認とログインユーザー作成
 
-```csharp
-# Usernameを選択
-How do you want users to be able to sign in? Username
-# No, I am done.を選択
-Do you want to configure advanced settings? No, I am done.
-```
+ここまで修正したら`yarn start`で起動しましょう。`http://localhost:3000/`でアクセスすると以下の画面が表示されます。画面内の**Create account**からアカウントを作成します。
 
-**Successfully**まで表示されたら完了です。追加したauthをデプロイします。数分かかるので待ちます。
+![](./img/2021-05-06-06-37-41.png)
 
-## 7.4 authサービスのデプロイ
+アカウントの作成画面に移動するので，作成します。次の画面で確認コードを入力する必要があるので，**有効なメールアドレス**を入力して下さい。
 
-```csharp
-$ amplify push --y
-```
+![](./img/2021-05-06-06-43-41.png)
 
-## 7.5 AWSコンソールで認証アプリを確認
+![](./img/2021-05-06-06-46-07.png)
 
-完了すると`reactamplify`の認証アプリが作成されます。以下のコマンドを実行するとAWSコンソール上でも確認出来ます。
+送られてきたメールの確認コードを入力するとログイン出来ます。
 
-```csharp
-$ amplify console
-# Consoleを選択 ，今回はUI側の選択には触れません
-✔ Which site do you want to open? · Console
-```
+![](./img/2021-05-06-06-47-32.png)
 
-次はReactアプリへ認証機能を追加していきます。
+この時点での成果をプッシュしていき，自動デプロイの結果も確認したいところですが，AWSコンソール上でAmplifyの設定を更新する箇所がありますので次項で進めます。

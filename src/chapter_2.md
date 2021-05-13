@@ -1,4 +1,4 @@
-# 2. GitHubにpushする
+# 2. GitHubにpush
 
 ## 2.1. GitHubに新規リポジトリ作成
 

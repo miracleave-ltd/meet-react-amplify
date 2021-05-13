@@ -1,65 +1,67 @@
-# 8. Reactアプリに認証機能を追加する
+# 8. 自動デプロイ(CI/CD)の確認と設定変更
 
-## 8.1. ReactアプリにAmplifyのAWSリソースを追加
+## 8.1. なぜ設定を変更するのか
 
-`react-amplify/src/index.tsx`を修正する。
+実は`.gitignore`に`aws-exports.js`が含まれてしまっているため，このままだとフロントエンドのビルドで**aws-exports.jsファイルが見つからない**というエラーが発生します。<br>試しに前項からGitへプッシュするとデプロイで失敗となります（試しても試さなくても構いません）。AWSコンソール上でこの問題を解決していきます。
 
-```ts
-// index.tsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import Amplify from 'aws-amplify';
-import config from './aws-exports';
-Amplify.configure(config);
+## 8.2. 環境変数の追加
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+AWSコンソールへアクセスし，Amplifyの環境変数を更新します。
+
+以下のように`aws-exports.js`に書いてあるプログラム(`const`部から全てコピー）をコピーします。こちらが環境変数の値となります。変数名は`secretfile`としています。
+
+![](./img/2021-05-06-09-33-15.png)
+
+## 8.3. ビルド設定の追加
+
+次はビルド設定を更新します。下図のとおりビルド設定に一行追加します。AWSコンソール上で修正してOKです。
+
+![](./img/2021-05-06-09-40-25.png)
+
+プログラムは以下となります。
+
+```yml
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # 追加
+        - echo $secretfile > ./src/aws-exports.js
+        - yarn install
+    build:
+      commands:
+        - yarn run build
+  artifacts:
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
 ```
 
-## 8.2. 認証用コンポーネントの追加
+## 8.4. 自動デプロイが成功するか確認
 
-`react-amplify/src/App.tsx`を修正する。
+変更したコードをプッシュします。
 
-```ts
-import logo from './logo.svg';
-import './App.css';
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
-
-function App() {
-  return (
-    <div className="App">
-      <header>
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hello Amplify!!</h1>
-      </header>
-      <AmplifySignOut />
-    </div>
-  );
-}
-
-export default withAuthenticator(App);
+```csharp
+git add .
+# コメントはお好きなように
+git commit -m "modified amplify auth add."
+git push
 ```
 
-## 8.4. 認証画面の動作確認とログインユーザー作成
+しばらくすると自動デプロイの正常完了が確認出来ます。
 
-ここまで修正したら`yarn start`で起動しましょう。`http://localhost:3000/`でアクセスすると以下の画面が表示されます。画面内の**Create account**からアカウントを作成します。
+![](./img/2021-05-06-09-46-16.png)
 
-![](./img/2021-05-06-06-37-41.png)
+## ex. コードを変更しない場合の手動デプロイ（再デプロイ）方法について
 
-アカウントの作成画面に移動するので，作成します。次の画面で確認コードを入力する必要があるので，**有効なメールアドレス**を入力して下さい。
+もし，デプロイ時の試している方は以下からGitプッシュを行わなくても再デプロイが可能です。赤枠部はリンクになっているので飛んだ先で手動での再デプロイが可能です。
 
-![](./img/2021-05-06-06-43-41.png)
+![](./img/2021-05-06-09-50-03.png)
 
-![](./img/2021-05-06-06-46-07.png)
+![](./img/2021-05-06-09-49-32.png)
 
-送られてきたメールの確認コードを入力するとログイン出来ます。
-
-![](./img/2021-05-06-06-47-32.png)
-
-この時点での成果をプッシュしていき，自動デプロイの結果も確認したいところですが，AWSコンソール上でAmplifyの設定を更新する箇所がありますので次項で進めます。
+ここまでで完了です。お疲れ様でした。<br>とはいえ今のままでは若干見た目も微妙なので，まだ時間に余力があれば次項を進めてください。
