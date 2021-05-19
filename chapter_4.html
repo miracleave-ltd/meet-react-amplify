@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="sidebar-visible no-js navy">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -43,6 +43,8 @@
 
         <!-- Custom theme stylesheets -->
         
+        <link rel="stylesheet" href="theme/custome.css">
+        
 
         
     </head>
@@ -50,7 +52,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -76,7 +78,7 @@
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
             html.classList.remove('no-js')
-            html.classList.remove('light')
+            html.classList.remove('navy')
             html.classList.add(theme);
             html.classList.add('js');
         </script>
@@ -95,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> GitHubにpush</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Amplifyでデプロイ</a></li><li class="chapter-item expanded "><a href="chapter_4.html" class="active"><strong aria-hidden="true">4.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Amplifyのプロジェクト作成</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyの認証サービス追加</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Reactアプリに認証機能追加</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> 自動デプロイ(CI/CD)の確認と設定変更</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li><li class="chapter-item expanded "><a href="capter_10.html"><strong aria-hidden="true">10.</strong> ハンズオン環境削除</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> GitHubにpush</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Amplifyでデプロイ</a></li><li class="chapter-item expanded "><a href="chapter_4.html" class="active"><strong aria-hidden="true">4.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Amplifyのプロジェクト作成</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyの認証サービス追加</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Reactアプリに認証機能追加</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> 自動デプロイ(CI/CD)の確認と設定変更</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> ハンズオン環境削除</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -114,10 +116,10 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy (default)</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
                         
@@ -166,11 +168,11 @@
                         <h1><a class="header" href="#4-amplifyのユーザー作成" id="4-amplifyのユーザー作成">4. Amplifyのユーザー作成</a></h1>
 <h2><a class="header" href="#41-amplifyプロジェクトを操作するアカウントの設定" id="41-amplifyプロジェクトを操作するアカウントの設定">4.1. Amplifyプロジェクトを操作するアカウントの設定</a></h2>
 <p>Dockerコンテナに入った状態で実施していきます。Amplifyの設定をしますが以下コマンド実行後は設問となるので注意して下さい。</p>
-<pre><code class="language-sh"># まずはこのコマンドを実行つ
+<pre><code class="language-bash"># まずはこのコマンドを実行する
 amplify configure
 </code></pre>
 <p>以降ターミナル上で設問が始まるので注意。以降は設問毎に表題を分割しています。</p>
-<pre><code class="language-sh"># amplify configureのコマンド実行直後
+<pre><code class="language-bash"># amplify configureのコマンド実行直後
 Initializing new Amplify CLI version...
 Done initializing new version.
 Scanning for plugins...
@@ -182,17 +184,17 @@ https://console.aws.amazon.com/
 Press Enter to continue # ここはEnterを押してOKです
 </code></pre>
 <h3><a class="header" href="#42-リージョンの選択" id="42-リージョンの選択">4.2. リージョンの選択</a></h3>
-<pre><code class="language-sh">Specify the AWS Region
+<pre><code class="language-bash">Specify the AWS Region
 # ap-northeast-1を選択し，Enter
 ? region:  ap-northeast-1
 </code></pre>
 <h3><a class="header" href="#43-iamユーザー名の入力" id="43-iamユーザー名の入力">4.3. IAMユーザー名の入力</a></h3>
-<pre><code class="language-sh">Specify the username of the new IAM user:
+<pre><code class="language-bash">Specify the username of the new IAM user:
 # dev-amplifyと入力し，Enter
 ? user name:  dev-amplify
 </code></pre>
 <h3><a class="header" href="#44-awsコンソール上でユーザーの確認" id="44-awsコンソール上でユーザーの確認">4.4. AWSコンソール上でユーザーの確認</a></h3>
-<pre><code class="language-sh">Complete the user creation using the AWS console
+<pre><code class="language-bash">Complete the user creation using the AWS console
 https://console.aws.amazon.com/iam/home?region=ap-northeast-1#/users$new?step=final&amp;accessKey&amp;userNames=dev-amplify&amp;permissionType=policies&amp;policies=arn:aws:iam::aws:policy%2FAdministratorAccess
 # ご自身のURLが表示されるのでユーザの確認をします（下図を参照）
 </code></pre>
@@ -207,7 +209,7 @@ https://console.aws.amazon.com/iam/home?region=ap-northeast-1#/users$new?step=fi
 <p>ユーザーが追加されるのでアクセスキーID，シークレットアクセスキーをコピーし，控えておいて下さい。<br>csvのダウンロードでも可です。
 <img src="./img/2021-05-06-01-50-01.png" alt="" /></p>
 <h3><a class="header" href="#45-アクセスキー情報の入力" id="45-アクセスキー情報の入力">4.5. アクセスキー情報の入力</a></h3>
-<pre><code class="language-sh">Press Enter to continue　# ←Enterを押してキー情報入力
+<pre><code class="language-bash">Press Enter to continue　# ←Enterを押してキー情報入力
 Enter the access key of the newly created user:
 # 前項で控えたアクセスキーIDをコピペしてEnter
 ? accessKeyId:  ********************
@@ -215,7 +217,7 @@ Enter the access key of the newly created user:
 ? secretAccessKey:  ****************************************
 </code></pre>
 <h3><a class="header" href="#56-プロファイル名の選択" id="56-プロファイル名の選択">5.6. プロファイル名の選択</a></h3>
-<pre><code class="language-sh">This would update/create the AWS Profile in your local machine
+<pre><code class="language-bash">This would update/create the AWS Profile in your local machine
 # デフォルトを選択しEnter
 ? Profile Name:  default
 # 完了すると表示される

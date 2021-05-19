@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="sidebar-visible no-js navy">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -43,6 +43,8 @@
 
         <!-- Custom theme stylesheets -->
         
+        <link rel="stylesheet" href="theme/custome.css">
+        
 
         
     </head>
@@ -50,7 +52,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -76,7 +78,7 @@
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
             html.classList.remove('no-js')
-            html.classList.remove('light')
+            html.classList.remove('navy')
             html.classList.add(theme);
             html.classList.add('js');
         </script>
@@ -95,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html" class="active"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> GitHubにpush</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Amplifyでデプロイ</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Amplifyのプロジェクト作成</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyの認証サービス追加</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Reactアプリに認証機能追加</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> 自動デプロイ(CI/CD)の確認と設定変更</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li><li class="chapter-item expanded "><a href="capter_10.html"><strong aria-hidden="true">10.</strong> ハンズオン環境削除</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html" class="active"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> GitHubにpush</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Amplifyでデプロイ</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Amplifyのプロジェクト作成</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyの認証サービス追加</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Reactアプリに認証機能追加</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> 自動デプロイ(CI/CD)の確認と設定変更</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> ハンズオン環境削除</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -114,10 +116,10 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy (default)</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
                         
@@ -169,7 +171,7 @@
 <h2><a class="header" href="#12-作業リポジトリのclone" id="12-作業リポジトリのclone">1.2. 作業リポジトリのclone</a></h2>
 <p>作業用ディレクトリとなるプログラムをcloneします。
 clone先はdockerコマンドが動作するご自身の環境に合わせてください。</p>
-<pre><code class="language-sh">git clone https://github.com/Tanabebe/amplify-demo.git &amp;&amp; cd amplify-demo
+<pre><code class="language-bash">git clone https://github.com/Tanabebe/amplify-demo.git &amp;&amp; cd amplify-demo
 </code></pre>
 <p>cloneしたらVS Codeで上記のフォルダを開きます。<br><strong>※Windowsの方はVS Codeを管理者権限で開いて下さい（後述の<code>docker cp</code>で失敗する可能性があるため，）。</strong><br>開いたら下図のように「ターミナル」→「新しいターミナル」を選択し，ペイン上に表示させます。</p>
 <p><img src="./img/2021-05-12-10-44-52.png" alt="" />
@@ -177,31 +179,31 @@ clone先はdockerコマンドが動作するご自身の環境に合わせてく
 <p>※デフォルトシェルは環境によって違うのですが，<code>bash</code>や<code>zsh</code>などdockerコマンドが通るシェルであれば問題ないです。</p>
 <h2><a class="header" href="#13-dockerの起動" id="13-dockerの起動">1.3. Dockerの起動</a></h2>
 <p>以下のコマンドを実行して，コンテナを起動します。<code>Creating amplify-demo_amplify_1 ... done</code>とターミナルに表示されればOKです。</p>
-<pre><code class="language-sh">docker-compose up -d
+<pre><code class="language-bash">docker-compose up -d
 </code></pre>
 <p>※PC性能，回線状況により異なりますが，大体5分程度でした。</p>
 <p>起動出来たら念の為，コンテナ名と起動状態の確認を行います。以下の例だと<code>amplify-demo_amplify_1</code>がコンテナ名です。</p>
-<pre><code class="language-sh">docker-compose ps
+<pre><code class="language-bash">docker-compose ps
 </code></pre>
 <p>以下のように，<strong>Name</strong>と表示されている箇所がコンテナ名です。</p>
-<pre><code>         Name                     Command            State                       Ports                     
+<pre><code class="language-bash">         Name                     Command            State                       Ports                     
 -----------------------------------------------------------------------------------------------------------
 amplify-demo_amplify_1   docker-entrypoint.sh node   Up      0.0.0.0:3000-&gt;3000/tcp, 0.0.0.0:3001-&gt;3001/tcp
 </code></pre>
 <p>コンテナ起動は問題ないですが，コンテナ側の<code>node_modules</code>はホスト側にマウントしていないため，以降のプログラム修正時に都合が悪いです。無理やり感はありますが，手動でコピーします。</p>
-<pre><code class="language-csharp"># docker cp コンテナ名:/amplify-demo/react-app/node_modules react-app/
+<pre><code class="language-bash"># docker cp コンテナ名:/amplify-demo/react-app/node_modules react-app/
 docker cp amplify-demo_amplify_1:/amplify-demo/react-app/node_modules react-app/
 </code></pre>
 <p>コピーが終わったらコンテナの中に入っていきます。</p>
-<pre><code class="language-csharp"># docker exec -it {コンテナ名} bash 
+<pre><code class="language-bash"># docker exec -it {コンテナ名} bash 
 docker exec -it amplify-demo_amplify_1 bash
 </code></pre>
 <h2><a class="header" href="#14-事前準備の最終確認" id="14-事前準備の最終確認">1.4. 事前準備の最終確認</a></h2>
 <p>コンテナの中に入ったら念の為，<code>node</code>と<code>npm</code>のバージョン，<code>amplify</code>がインストールされているか確認します。</p>
-<pre><code class="language-sh">node -v &amp;&amp; npm -v &amp;&amp; amplify --version
+<pre><code class="language-bash">node -v &amp;&amp; npm -v &amp;&amp; amplify --version
 </code></pre>
 <p>下記のように表示されたらOKです。</p>
-<pre><code class="language-sh">v14.16.1
+<pre><code class="language-bash">v14.16.1
 6.14.12
 Initializing new Amplify CLI version...
 Done initializing new version.
@@ -210,10 +212,10 @@ Plugin scan successful
 4.50.2
 </code></pre>
 <p>最後にReactアプリが動作するか確認します。</p>
-<pre><code class="language-sh">yarn start
+<pre><code class="language-bash">yarn start
 </code></pre>
 <p>以下のようにコンソールに表示されたら<code>http://localhost:3000</code>にアクセスしましょう。</p>
-<pre><code class="language-csharp">Compiled successfully!
+<pre><code class="language-bash">Compiled successfully!
 
 You can now view react-app in the browser.
 

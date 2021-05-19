@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="sidebar-visible no-js navy">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -45,6 +45,8 @@
 
         <!-- Custom theme stylesheets -->
         
+        <link rel="stylesheet" href="theme/custome.css">
+        
 
         
     </head>
@@ -52,7 +54,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -78,7 +80,7 @@
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
             html.classList.remove('no-js')
-            html.classList.remove('light')
+            html.classList.remove('navy')
             html.classList.add(theme);
             html.classList.add('js');
         </script>
@@ -97,7 +99,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> GitHubにpush</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Amplifyでデプロイ</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Amplifyのプロジェクト作成</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyの認証サービス追加</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Reactアプリに認証機能追加</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> 自動デプロイ(CI/CD)の確認と設定変更</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li><li class="chapter-item expanded "><a href="capter_10.html"><strong aria-hidden="true">10.</strong> ハンズオン環境削除</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> GitHubにpush</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Amplifyでデプロイ</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Amplifyのプロジェクト作成</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyの認証サービス追加</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Reactアプリに認証機能追加</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> 自動デプロイ(CI/CD)の確認と設定変更</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> ハンズオン環境削除</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -116,10 +118,10 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy (default)</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
                         
@@ -171,7 +173,7 @@
 <h2><a class="header" href="#12-作業リポジトリのclone" id="12-作業リポジトリのclone">1.2. 作業リポジトリのclone</a></h2>
 <p>作業用ディレクトリとなるプログラムをcloneします。
 clone先はdockerコマンドが動作するご自身の環境に合わせてください。</p>
-<pre><code class="language-sh">git clone https://github.com/Tanabebe/amplify-demo.git &amp;&amp; cd amplify-demo
+<pre><code class="language-bash">git clone https://github.com/Tanabebe/amplify-demo.git &amp;&amp; cd amplify-demo
 </code></pre>
 <p>cloneしたらVS Codeで上記のフォルダを開きます。<br><strong>※Windowsの方はVS Codeを管理者権限で開いて下さい（後述の<code>docker cp</code>で失敗する可能性があるため，）。</strong><br>開いたら下図のように「ターミナル」→「新しいターミナル」を選択し，ペイン上に表示させます。</p>
 <p><img src="./img/2021-05-12-10-44-52.png" alt="" />
@@ -179,31 +181,31 @@ clone先はdockerコマンドが動作するご自身の環境に合わせてく
 <p>※デフォルトシェルは環境によって違うのですが，<code>bash</code>や<code>zsh</code>などdockerコマンドが通るシェルであれば問題ないです。</p>
 <h2><a class="header" href="#13-dockerの起動" id="13-dockerの起動">1.3. Dockerの起動</a></h2>
 <p>以下のコマンドを実行して，コンテナを起動します。<code>Creating amplify-demo_amplify_1 ... done</code>とターミナルに表示されればOKです。</p>
-<pre><code class="language-sh">docker-compose up -d
+<pre><code class="language-bash">docker-compose up -d
 </code></pre>
 <p>※PC性能，回線状況により異なりますが，大体5分程度でした。</p>
 <p>起動出来たら念の為，コンテナ名と起動状態の確認を行います。以下の例だと<code>amplify-demo_amplify_1</code>がコンテナ名です。</p>
-<pre><code class="language-sh">docker-compose ps
+<pre><code class="language-bash">docker-compose ps
 </code></pre>
 <p>以下のように，<strong>Name</strong>と表示されている箇所がコンテナ名です。</p>
-<pre><code>         Name                     Command            State                       Ports                     
+<pre><code class="language-bash">         Name                     Command            State                       Ports                     
 -----------------------------------------------------------------------------------------------------------
 amplify-demo_amplify_1   docker-entrypoint.sh node   Up      0.0.0.0:3000-&gt;3000/tcp, 0.0.0.0:3001-&gt;3001/tcp
 </code></pre>
 <p>コンテナ起動は問題ないですが，コンテナ側の<code>node_modules</code>はホスト側にマウントしていないため，以降のプログラム修正時に都合が悪いです。無理やり感はありますが，手動でコピーします。</p>
-<pre><code class="language-csharp"># docker cp コンテナ名:/amplify-demo/react-app/node_modules react-app/
+<pre><code class="language-bash"># docker cp コンテナ名:/amplify-demo/react-app/node_modules react-app/
 docker cp amplify-demo_amplify_1:/amplify-demo/react-app/node_modules react-app/
 </code></pre>
 <p>コピーが終わったらコンテナの中に入っていきます。</p>
-<pre><code class="language-csharp"># docker exec -it {コンテナ名} bash 
+<pre><code class="language-bash"># docker exec -it {コンテナ名} bash 
 docker exec -it amplify-demo_amplify_1 bash
 </code></pre>
 <h2><a class="header" href="#14-事前準備の最終確認" id="14-事前準備の最終確認">1.4. 事前準備の最終確認</a></h2>
 <p>コンテナの中に入ったら念の為，<code>node</code>と<code>npm</code>のバージョン，<code>amplify</code>がインストールされているか確認します。</p>
-<pre><code class="language-sh">node -v &amp;&amp; npm -v &amp;&amp; amplify --version
+<pre><code class="language-bash">node -v &amp;&amp; npm -v &amp;&amp; amplify --version
 </code></pre>
 <p>下記のように表示されたらOKです。</p>
-<pre><code class="language-sh">v14.16.1
+<pre><code class="language-bash">v14.16.1
 6.14.12
 Initializing new Amplify CLI version...
 Done initializing new version.
@@ -212,10 +214,10 @@ Plugin scan successful
 4.50.2
 </code></pre>
 <p>最後にReactアプリが動作するか確認します。</p>
-<pre><code class="language-sh">yarn start
+<pre><code class="language-bash">yarn start
 </code></pre>
 <p>以下のようにコンソールに表示されたら<code>http://localhost:3000</code>にアクセスしましょう。</p>
-<pre><code class="language-csharp">Compiled successfully!
+<pre><code class="language-bash">Compiled successfully!
 
 You can now view react-app in the browser.
 
@@ -275,11 +277,11 @@ git push -u origin main
 <h1><a class="header" href="#4-amplifyのユーザー作成" id="4-amplifyのユーザー作成">4. Amplifyのユーザー作成</a></h1>
 <h2><a class="header" href="#41-amplifyプロジェクトを操作するアカウントの設定" id="41-amplifyプロジェクトを操作するアカウントの設定">4.1. Amplifyプロジェクトを操作するアカウントの設定</a></h2>
 <p>Dockerコンテナに入った状態で実施していきます。Amplifyの設定をしますが以下コマンド実行後は設問となるので注意して下さい。</p>
-<pre><code class="language-sh"># まずはこのコマンドを実行つ
+<pre><code class="language-bash"># まずはこのコマンドを実行する
 amplify configure
 </code></pre>
 <p>以降ターミナル上で設問が始まるので注意。以降は設問毎に表題を分割しています。</p>
-<pre><code class="language-sh"># amplify configureのコマンド実行直後
+<pre><code class="language-bash"># amplify configureのコマンド実行直後
 Initializing new Amplify CLI version...
 Done initializing new version.
 Scanning for plugins...
@@ -291,17 +293,17 @@ https://console.aws.amazon.com/
 Press Enter to continue # ここはEnterを押してOKです
 </code></pre>
 <h3><a class="header" href="#42-リージョンの選択" id="42-リージョンの選択">4.2. リージョンの選択</a></h3>
-<pre><code class="language-sh">Specify the AWS Region
+<pre><code class="language-bash">Specify the AWS Region
 # ap-northeast-1を選択し，Enter
 ? region:  ap-northeast-1
 </code></pre>
 <h3><a class="header" href="#43-iamユーザー名の入力" id="43-iamユーザー名の入力">4.3. IAMユーザー名の入力</a></h3>
-<pre><code class="language-sh">Specify the username of the new IAM user:
+<pre><code class="language-bash">Specify the username of the new IAM user:
 # dev-amplifyと入力し，Enter
 ? user name:  dev-amplify
 </code></pre>
 <h3><a class="header" href="#44-awsコンソール上でユーザーの確認" id="44-awsコンソール上でユーザーの確認">4.4. AWSコンソール上でユーザーの確認</a></h3>
-<pre><code class="language-sh">Complete the user creation using the AWS console
+<pre><code class="language-bash">Complete the user creation using the AWS console
 https://console.aws.amazon.com/iam/home?region=ap-northeast-1#/users$new?step=final&amp;accessKey&amp;userNames=dev-amplify&amp;permissionType=policies&amp;policies=arn:aws:iam::aws:policy%2FAdministratorAccess
 # ご自身のURLが表示されるのでユーザの確認をします（下図を参照）
 </code></pre>
@@ -316,7 +318,7 @@ https://console.aws.amazon.com/iam/home?region=ap-northeast-1#/users$new?step=fi
 <p>ユーザーが追加されるのでアクセスキーID，シークレットアクセスキーをコピーし，控えておいて下さい。<br>csvのダウンロードでも可です。
 <img src="./img/2021-05-06-01-50-01.png" alt="" /></p>
 <h3><a class="header" href="#45-アクセスキー情報の入力" id="45-アクセスキー情報の入力">4.5. アクセスキー情報の入力</a></h3>
-<pre><code class="language-sh">Press Enter to continue　# ←Enterを押してキー情報入力
+<pre><code class="language-bash">Press Enter to continue　# ←Enterを押してキー情報入力
 Enter the access key of the newly created user:
 # 前項で控えたアクセスキーIDをコピペしてEnter
 ? accessKeyId:  ********************
@@ -324,7 +326,7 @@ Enter the access key of the newly created user:
 ? secretAccessKey:  ****************************************
 </code></pre>
 <h3><a class="header" href="#56-プロファイル名の選択" id="56-プロファイル名の選択">5.6. プロファイル名の選択</a></h3>
-<pre><code class="language-sh">This would update/create the AWS Profile in your local machine
+<pre><code class="language-bash">This would update/create the AWS Profile in your local machine
 # デフォルトを選択しEnter
 ? Profile Name:  default
 # 完了すると表示される
@@ -334,15 +336,15 @@ Successfully set up the new user.
 <h1><a class="header" href="#5-amplifyのプロジェクト作成" id="5-amplifyのプロジェクト作成">5. Amplifyのプロジェクト作成</a></h1>
 <h2><a class="header" href="#51-amplifyプロジェクトの初期化" id="51-amplifyプロジェクトの初期化">5.1. Amplifyプロジェクトの初期化</a></h2>
 <p>引き続きDockerコンテナに入った状態で実施していきます。こちらも前項と同じく，以下コマンド実行後は設問となるので注意して下さい。</p>
-<pre><code class="language-sh"># まずは以下を実行
+<pre><code class="language-bash"># まずは以下を実行
 amplify init
 </code></pre>
 <h2><a class="header" href="#52-初期化するプロジェクト構成の選択" id="52-初期化するプロジェクト構成の選択">5.2. 初期化するプロジェクト構成の選択</a></h2>
-<pre><code class="language-sh"># amplify initのコマンド実行直後
+<pre><code class="language-bash"># amplify initのコマンド実行直後
 Note: It is recommended to run this command from the root of your app directory
 ? Enter a name for the project reactamplify # ←Enterを押します
 </code></pre>
-<pre><code class="language-sh">The following configuration will be applied:
+<pre><code class="language-bash">The following configuration will be applied:
 
 Project information
 | Name: reactamplify
@@ -359,14 +361,14 @@ Project information
 Using default provider  awscloudformation
 </code></pre>
 <h2><a class="header" href="#53-認証方法の種類を選択" id="53-認証方法の種類を選択">5.3. 認証方法の種類を選択</a></h2>
-<pre><code class="language-sh"># AWS profileを選択
+<pre><code class="language-bash"># AWS profileを選択
 ? Select the authentication method you want to use: AWS profile
 
 For more information on AWS Profiles, see:
 https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
 </code></pre>
 <h2><a class="header" href="#54-使用するプロファイルを選択" id="54-使用するプロファイルを選択">5.4. 使用するプロファイルを選択</a></h2>
-<pre><code class="language-sh"># defaultを選択
+<pre><code class="language-bash"># defaultを選択
 ? Please choose the profile you want to use default
 Adding backend environment dev to AWS Amplify Console app: d2nvyvjheogdaz
 ⠇ Initializing project in the cloud...
@@ -392,11 +394,11 @@ Try &quot;amplify add api&quot; to create a backend API and then &quot;amplify p
 <h1><a class="header" href="#6-amplifyの認証サービス追加" id="6-amplifyの認証サービス追加">6. Amplifyの認証サービス追加</a></h1>
 <h2><a class="header" href="#61-amplifyのauth機能を追加" id="61-amplifyのauth機能を追加">6.1. AmplifyのAuth機能を追加</a></h2>
 <p>こちらも前項と同じく，以下コマンド実行を行いますが，同じように設問となるので注意して下さい。</p>
-<pre><code class="language-csharp"># 以下のコマンドを実行
+<pre><code class="language-bash"># 以下のコマンドを実行
 amplify add auth
 </code></pre>
 <h2><a class="header" href="#62-認証セキュリティ構成の選択" id="62-認証セキュリティ構成の選択">6.2 認証・セキュリティ構成の選択</a></h2>
-<pre><code class="language-csharp"># amplify add authの実行直後
+<pre><code class="language-bash"># amplify add authの実行直後
 Using service: Cognito, provided by: awscloudformation
  
 The current configured provider is Amazon Cognito. 
@@ -406,18 +408,18 @@ uration
 Warning: you will not be able to edit these selections. 
 </code></pre>
 <h2><a class="header" href="#63-ユーザーのログイン方法の選択" id="63-ユーザーのログイン方法の選択">6.3 ユーザーのログイン方法の選択</a></h2>
-<pre><code class="language-csharp"># Usernameを選択
+<pre><code class="language-bash"># Usernameを選択
 How do you want users to be able to sign in? Username
 # No, I am done.を選択
 Do you want to configure advanced settings? No, I am done.
 </code></pre>
 <p><strong>Successfully</strong>まで表示されたら完了です。追加したauthをデプロイします。数分かかるので待ちます。</p>
 <h2><a class="header" href="#64-authサービスのデプロイ" id="64-authサービスのデプロイ">6.4 authサービスのデプロイ</a></h2>
-<pre><code class="language-csharp">$ amplify push --y
+<pre><code class="language-bash">$ amplify push --y
 </code></pre>
 <h2><a class="header" href="#75-awsコンソールで認証アプリを確認" id="75-awsコンソールで認証アプリを確認">7.5 AWSコンソールで認証アプリを確認</a></h2>
 <p>完了すると<code>reactamplify</code>の認証アプリが作成されます。以下のコマンドを実行するとAWSコンソール上でも確認出来ます。</p>
-<pre><code class="language-csharp">$ amplify console
+<pre><code class="language-bash">$ amplify console
 # Consoleを選択 ，今回はUI側の選択には触れません
 ✔ Which site do you want to open? · Console
 </code></pre>
@@ -502,7 +504,7 @@ frontend:
 </code></pre>
 <h2><a class="header" href="#84-自動デプロイが成功するか確認" id="84-自動デプロイが成功するか確認">8.4. 自動デプロイが成功するか確認</a></h2>
 <p>変更したコードをプッシュします。</p>
-<pre><code class="language-csharp">git add .
+<pre><code class="language-bash">git add .
 # コメントはお好きなように
 git commit -m &quot;modified amplify auth add.&quot;
 git push
@@ -513,7 +515,7 @@ git push
 <p>もし，デプロイ時の試している方は以下からGitプッシュを行わなくても再デプロイが可能です。赤枠部はリンクになっているので飛んだ先で手動での再デプロイが可能です。</p>
 <p><img src="./img/2021-05-06-09-50-03.png" alt="" /></p>
 <p><img src="./img/2021-05-06-09-49-32.png" alt="" /></p>
-<p>ここまででAmplifyを使ったハンズオンは完了です。お疲れ様でした。とはいえ今のままでは若干見た目も微妙なので，まだ時間に余力があれば次項を進めてください。<br>また，最後に今回作成した環境削除について<a href="./capter_10.html">こちら</a>に手順がありますので参照ください。</p>
+<p>ここまででAmplifyを使ったハンズオンは完了です。お疲れ様でした。とはいえ今のままでは若干見た目も微妙なので，まだ時間に余力があれば次項を進めてください。<br>また，最後に今回作成した環境削除について<a href="./chapter_10.html">こちら</a>に手順がありますので参照ください。</p>
 <h1><a class="header" href="#9-amplifyの認証画面を日本語化しreactアプリレイアウトを整える" id="9-amplifyの認証画面を日本語化しreactアプリレイアウトを整える">9. Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></h1>
 <h2><a class="header" href="#91-画面レイアウトを修正する" id="91-画面レイアウトを修正する">9.1. 画面レイアウトを修正する</a></h2>
 <p>追加と修正を行うファイルは下図の赤枠が対象です。</p>
@@ -752,6 +754,83 @@ export default App;
 </code></pre>
 <p>これでざっくりと画面レイアウトを変更出来たので，完了となります。認証機能がこれだけ簡単に実装出来るとは...という驚きが多いAmplifyでした。AmplifyコンポーネントやらAPIもかなり用意されているようですが，これを使いこなすのはなかなか骨は折れそうです。<br>これにて「mirameet vol.16」のハンズオンは終了となります。ご参加いただいた方，お疲れ様でした。</p>
 <h1><a class="header" href="#10-ハンズオン環境削除" id="10-ハンズオン環境削除">10. ハンズオン環境削除</a></h1>
+<p>使用したAmplifyアプリの削除とIAMユーザーの削除，そしてコンテナとイメージの削除を行います．</p>
+<h2><a class="header" href="#101-amplify上のアプリを削除" id="101-amplify上のアプリを削除">10.1. Amplify上のアプリを削除</a></h2>
+<p>AWSコンソール上からすべてのアプリを表示し，削除するアプリを選択します。まずは<code>reactamplify（下図左側）</code>を削除します。こちらは<code>amplify add auth</code>で追加したアプリになります。</p>
+<p><img src="./img/2021-05-19-12-03-34.png" alt="" /></p>
+<p>画面右上のアクションから<strong>アプリの削除</strong>を押します。</p>
+<p><img src="./img/2021-05-19-12-08-10.png" alt="" /></p>
+<p>テキストボックスに<strong>delete</strong>を入力し，<strong>Delete</strong>ボタンを押します。実際に削除されるまでは少々時間がかかりますが，これで認証用に作成した<code>auth</code>のアプリは削除されます。</p>
+<p><img src="./img/2021-05-19-12-10-12.png" alt="" /></p>
+<p>次はReactで作成した<code>react-amplify</code>アプリ（下図右側）の削除を行います。</p>
+<p><img src="./img/2021-05-19-12-03-34.png" alt="" /></p>
+<p>こちらも画面右上のアクションから<strong>アプリの削除</strong>を押します。</p>
+<p><img src="./img/2021-05-19-12-14-59.png" alt="" /></p>
+<p>同じくテキストボックスに<strong>delete</strong>を入力し，<strong>Delete</strong>ボタンを押します。こちらはすぐ削除されます。</p>
+<p><img src="./img/2021-05-19-12-17-09.png" alt="" /></p>
+<h2><a class="header" href="#102-cognitoのidプール削除" id="102-cognitoのidプール削除">10.2. CognitoのIDプール削除</a></h2>
+<p>検索ボックスに<strong>cognito</strong>を入力し，Cognitoのサービスへ飛びます。
+<img src="./img/2021-05-19-12-55-49.png" alt="" /></p>
+<p><strong>IDプールの管理</strong>ボタンを押します。</p>
+<p><img src="./img/2021-05-19-12-57-09.png" alt="" /></p>
+<p>Amplifyで作成したアプリと対応したIDプールがあるので選択します。</p>
+<p><img src="./img/2021-05-19-12-57-57.png" alt="" /></p>
+<p>画面右上の<strong>IDプールの編集</strong>リンクを押します。</p>
+<p><img src="./img/2021-05-19-12-59-27.png" alt="" /></p>
+<p>飛んだ先の画面下部に<strong>IDプールの削除</strong>ボタンがあるので押します。</p>
+<p><img src="./img/2021-05-19-13-02-18.png" alt="" /></p>
+<p><strong>プールの削除</strong>を押し，IDプールの削除は完了です。
+<img src="./img/2021-05-19-13-03-30.png" alt="" /></p>
+<h2><a class="header" href="#103-cognitoのユーザープール削除" id="103-cognitoのユーザープール削除">10.3. Cognitoのユーザープール削除</a></h2>
+<p>再び検索ボックスに<strong>cognito</strong>を入力し，Cognitoのサービスへ飛びます。
+<img src="./img/2021-05-19-12-55-49.png" alt="" /></p>
+<p><strong>ユーザープールの管理</strong>ボタンを押します。</p>
+<p><img src="./img/2021-05-19-13-05-42.png" alt="" /></p>
+<p>Amplifyで作成したアプリと対応したユーザープールがあるので選択します。</p>
+<p><img src="./img/2021-05-19-13-07-10.png" alt="" /></p>
+<p>飛んだ先の画面右上に<strong>プールの削除</strong>リンクがあるので押します。</p>
+<p><img src="./img/2021-05-19-13-08-23.png" alt="" /></p>
+<p>テキストボックスに<strong>delete</strong>と入力し，<strong>プールの削除</strong>ボタンを押して完了です。</p>
+<p><img src="./img/2021-05-19-13-09-50.png" alt="" /></p>
+<h2><a class="header" href="#104-iamユーザーの削除" id="104-iamユーザーの削除">10.4. IAMユーザーの削除</a></h2>
+<p>amplify用に作成したユーザーを削除していきます。検索ボックスに<strong>IAM</strong>と入力し，<strong>ユーザー</strong>を選択してください。</p>
+<p><img src="./img/2021-05-19-12-24-43.png" alt="" /></p>
+<p>削除するユーザーの<strong>チェックボックスをON</strong>にし，<strong>ユーザーの削除</strong>ボタンを押します。</p>
+<p><img src="./img/2021-05-19-12-27-09.png" alt="" /></p>
+<p><strong>チェックボックスをONにし</strong>，<strong>はい，削除します</strong>ボタンを押します。
+<img src="./img/2021-05-19-12-28-56.png" alt="" /></p>
+<p>AWSコンソールの作業はこれで完了です。次は使用したコンテナとイメージを削除します。</p>
+<h2><a class="header" href="#105-dockerコンテナの削除" id="105-dockerコンテナの削除">10.5. Dockerコンテナの削除</a></h2>
+<p>VS Codeのターミナル，もしくはご自身が使用しているターミナルで以下コマンドを実行し，稼働中のコンテナを停止します。停止に完了すると停止したコンテナIDがターミナルに表示されます。</p>
+<pre><code class="language-bash">docker stop $(docker ps -q)
+</code></pre>
+<p>念の為，停止している全コンテナを確認します。</p>
+<pre><code class="language-bash">docker ps -a
+</code></pre>
+<p>下図のようにターミナル上に表示されるので，コンテナIDもしくはコンテナ名をコピーして下さい。</p>
+<p><img src="./img/2021-05-19-13-27-29.png" alt="" /></p>
+<p>以下コマンドを実行します。</p>
+<pre><code class="language-bash"># docker rm コンテナIDもしくはコンテナ名
+docker rm amplify-demo_amplify_1
+</code></pre>
+<p>コンテナを確認し，消えていればコンテナの削除は完了です。次はイメージを削除します。</p>
+<pre><code class="language-bash">docker ps -a
+</code></pre>
+<h2><a class="header" href="#106-dockerイメージの削除" id="106-dockerイメージの削除">10.6. Dockerイメージの削除</a></h2>
+<p>ローカルに保存されているイメージの確認をするので以下コマンドを実行してください。</p>
+<pre><code class="language-bash">docker images
+</code></pre>
+<p>下図のようにリポジトリ部は<code>tanabebe/meet-amplify-demo</code>となっているのでイメージIDをコピーします。</p>
+<p><img src="./img/2021-05-19-13-36-15.png" alt="" /></p>
+<p>コピーしたイメージIDを使用してイメージの削除コマンドを実行します。</p>
+<pre><code class="language-bash"># docker rmi イメージID
+docker rmi 21d270f241ed
+</code></pre>
+<p>※もし消えない場合は<code>docker rmi -f 21d270f241ed</code>のように，強制的に削除する<code>-f</code>のオプションを使用してください。</p>
+<p>最後にイメージが消えているか確認し，完了です。</p>
+<pre><code class="language-bash">docker images
+</code></pre>
+<p>お疲れ様でした。</p>
 
                     </main>
 

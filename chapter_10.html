@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="sidebar-visible no-js navy">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -43,6 +43,8 @@
 
         <!-- Custom theme stylesheets -->
         
+        <link rel="stylesheet" href="theme/custome.css">
+        
 
         
     </head>
@@ -50,7 +52,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -76,7 +78,7 @@
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
             html.classList.remove('no-js')
-            html.classList.remove('light')
+            html.classList.remove('navy')
             html.classList.add(theme);
             html.classList.add('js');
         </script>
@@ -95,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> GitHubにpush</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Amplifyでデプロイ</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Amplifyのプロジェクト作成</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyの認証サービス追加</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Reactアプリに認証機能追加</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> 自動デプロイ(CI/CD)の確認と設定変更</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li><li class="chapter-item expanded "><a href="capter_10.html" class="active"><strong aria-hidden="true">10.</strong> ハンズオン環境削除</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> GitHubにpush</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Amplifyでデプロイ</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Amplifyのプロジェクト作成</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">6.</strong> Amplifyの認証サービス追加</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Reactアプリに認証機能追加</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> 自動デプロイ(CI/CD)の確認と設定変更</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li><li class="chapter-item expanded "><a href="chapter_10.html" class="active"><strong aria-hidden="true">10.</strong> ハンズオン環境削除</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -114,10 +116,10 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy (default)</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
                         
@@ -164,6 +166,83 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#10-ハンズオン環境削除" id="10-ハンズオン環境削除">10. ハンズオン環境削除</a></h1>
+<p>使用したAmplifyアプリの削除とIAMユーザーの削除，そしてコンテナとイメージの削除を行います．</p>
+<h2><a class="header" href="#101-amplify上のアプリを削除" id="101-amplify上のアプリを削除">10.1. Amplify上のアプリを削除</a></h2>
+<p>AWSコンソール上からすべてのアプリを表示し，削除するアプリを選択します。まずは<code>reactamplify（下図左側）</code>を削除します。こちらは<code>amplify add auth</code>で追加したアプリになります。</p>
+<p><img src="./img/2021-05-19-12-03-34.png" alt="" /></p>
+<p>画面右上のアクションから<strong>アプリの削除</strong>を押します。</p>
+<p><img src="./img/2021-05-19-12-08-10.png" alt="" /></p>
+<p>テキストボックスに<strong>delete</strong>を入力し，<strong>Delete</strong>ボタンを押します。実際に削除されるまでは少々時間がかかりますが，これで認証用に作成した<code>auth</code>のアプリは削除されます。</p>
+<p><img src="./img/2021-05-19-12-10-12.png" alt="" /></p>
+<p>次はReactで作成した<code>react-amplify</code>アプリ（下図右側）の削除を行います。</p>
+<p><img src="./img/2021-05-19-12-03-34.png" alt="" /></p>
+<p>こちらも画面右上のアクションから<strong>アプリの削除</strong>を押します。</p>
+<p><img src="./img/2021-05-19-12-14-59.png" alt="" /></p>
+<p>同じくテキストボックスに<strong>delete</strong>を入力し，<strong>Delete</strong>ボタンを押します。こちらはすぐ削除されます。</p>
+<p><img src="./img/2021-05-19-12-17-09.png" alt="" /></p>
+<h2><a class="header" href="#102-cognitoのidプール削除" id="102-cognitoのidプール削除">10.2. CognitoのIDプール削除</a></h2>
+<p>検索ボックスに<strong>cognito</strong>を入力し，Cognitoのサービスへ飛びます。
+<img src="./img/2021-05-19-12-55-49.png" alt="" /></p>
+<p><strong>IDプールの管理</strong>ボタンを押します。</p>
+<p><img src="./img/2021-05-19-12-57-09.png" alt="" /></p>
+<p>Amplifyで作成したアプリと対応したIDプールがあるので選択します。</p>
+<p><img src="./img/2021-05-19-12-57-57.png" alt="" /></p>
+<p>画面右上の<strong>IDプールの編集</strong>リンクを押します。</p>
+<p><img src="./img/2021-05-19-12-59-27.png" alt="" /></p>
+<p>飛んだ先の画面下部に<strong>IDプールの削除</strong>ボタンがあるので押します。</p>
+<p><img src="./img/2021-05-19-13-02-18.png" alt="" /></p>
+<p><strong>プールの削除</strong>を押し，IDプールの削除は完了です。
+<img src="./img/2021-05-19-13-03-30.png" alt="" /></p>
+<h2><a class="header" href="#103-cognitoのユーザープール削除" id="103-cognitoのユーザープール削除">10.3. Cognitoのユーザープール削除</a></h2>
+<p>再び検索ボックスに<strong>cognito</strong>を入力し，Cognitoのサービスへ飛びます。
+<img src="./img/2021-05-19-12-55-49.png" alt="" /></p>
+<p><strong>ユーザープールの管理</strong>ボタンを押します。</p>
+<p><img src="./img/2021-05-19-13-05-42.png" alt="" /></p>
+<p>Amplifyで作成したアプリと対応したユーザープールがあるので選択します。</p>
+<p><img src="./img/2021-05-19-13-07-10.png" alt="" /></p>
+<p>飛んだ先の画面右上に<strong>プールの削除</strong>リンクがあるので押します。</p>
+<p><img src="./img/2021-05-19-13-08-23.png" alt="" /></p>
+<p>テキストボックスに<strong>delete</strong>と入力し，<strong>プールの削除</strong>ボタンを押して完了です。</p>
+<p><img src="./img/2021-05-19-13-09-50.png" alt="" /></p>
+<h2><a class="header" href="#104-iamユーザーの削除" id="104-iamユーザーの削除">10.4. IAMユーザーの削除</a></h2>
+<p>amplify用に作成したユーザーを削除していきます。検索ボックスに<strong>IAM</strong>と入力し，<strong>ユーザー</strong>を選択してください。</p>
+<p><img src="./img/2021-05-19-12-24-43.png" alt="" /></p>
+<p>削除するユーザーの<strong>チェックボックスをON</strong>にし，<strong>ユーザーの削除</strong>ボタンを押します。</p>
+<p><img src="./img/2021-05-19-12-27-09.png" alt="" /></p>
+<p><strong>チェックボックスをONにし</strong>，<strong>はい，削除します</strong>ボタンを押します。
+<img src="./img/2021-05-19-12-28-56.png" alt="" /></p>
+<p>AWSコンソールの作業はこれで完了です。次は使用したコンテナとイメージを削除します。</p>
+<h2><a class="header" href="#105-dockerコンテナの削除" id="105-dockerコンテナの削除">10.5. Dockerコンテナの削除</a></h2>
+<p>VS Codeのターミナル，もしくはご自身が使用しているターミナルで以下コマンドを実行し，稼働中のコンテナを停止します。停止に完了すると停止したコンテナIDがターミナルに表示されます。</p>
+<pre><code class="language-bash">docker stop $(docker ps -q)
+</code></pre>
+<p>念の為，停止している全コンテナを確認します。</p>
+<pre><code class="language-bash">docker ps -a
+</code></pre>
+<p>下図のようにターミナル上に表示されるので，コンテナIDもしくはコンテナ名をコピーして下さい。</p>
+<p><img src="./img/2021-05-19-13-27-29.png" alt="" /></p>
+<p>以下コマンドを実行します。</p>
+<pre><code class="language-bash"># docker rm コンテナIDもしくはコンテナ名
+docker rm amplify-demo_amplify_1
+</code></pre>
+<p>コンテナを確認し，消えていればコンテナの削除は完了です。次はイメージを削除します。</p>
+<pre><code class="language-bash">docker ps -a
+</code></pre>
+<h2><a class="header" href="#106-dockerイメージの削除" id="106-dockerイメージの削除">10.6. Dockerイメージの削除</a></h2>
+<p>ローカルに保存されているイメージの確認をするので以下コマンドを実行してください。</p>
+<pre><code class="language-bash">docker images
+</code></pre>
+<p>下図のようにリポジトリ部は<code>tanabebe/meet-amplify-demo</code>となっているのでイメージIDをコピーします。</p>
+<p><img src="./img/2021-05-19-13-36-15.png" alt="" /></p>
+<p>コピーしたイメージIDを使用してイメージの削除コマンドを実行します。</p>
+<pre><code class="language-bash"># docker rmi イメージID
+docker rmi 21d270f241ed
+</code></pre>
+<p>※もし消えない場合は<code>docker rmi -f 21d270f241ed</code>のように，強制的に削除する<code>-f</code>のオプションを使用してください。</p>
+<p>最後にイメージが消えているか確認し，完了です。</p>
+<pre><code class="language-bash">docker images
+</code></pre>
+<p>お疲れ様でした。</p>
 
                     </main>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="sidebar-visible no-js navy">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -43,6 +43,8 @@
 
         <!-- Custom theme stylesheets -->
         
+        <link rel="stylesheet" href="theme/custome.css">
+        
 
         
     </head>
@@ -50,7 +52,7 @@
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
             var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -76,7 +78,7 @@
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
             html.classList.remove('no-js')
-            html.classList.remove('light')
+            html.classList.remove('navy')
             html.classList.add(theme);
             html.classList.add('js');
         </script>
@@ -95,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> GitHubにpush</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Amplifyでデプロイ</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Amplifyのプロジェクト作成</a></li><li class="chapter-item expanded "><a href="chapter_6.html" class="active"><strong aria-hidden="true">6.</strong> Amplifyの認証サービス追加</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Reactアプリに認証機能追加</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> 自動デプロイ(CI/CD)の確認と設定変更</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li><li class="chapter-item expanded "><a href="capter_10.html"><strong aria-hidden="true">10.</strong> ハンズオン環境削除</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> 環境作成</a></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> GitHubにpush</a></li><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">3.</strong> Amplifyでデプロイ</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">4.</strong> Amplifyのユーザー作成</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">5.</strong> Amplifyのプロジェクト作成</a></li><li class="chapter-item expanded "><a href="chapter_6.html" class="active"><strong aria-hidden="true">6.</strong> Amplifyの認証サービス追加</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Reactアプリに認証機能追加</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">8.</strong> 自動デプロイ(CI/CD)の確認と設定変更</a></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">9.</strong> Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">10.</strong> ハンズオン環境削除</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -114,10 +116,10 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy (default)</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
                         
@@ -166,11 +168,11 @@
                         <h1><a class="header" href="#6-amplifyの認証サービス追加" id="6-amplifyの認証サービス追加">6. Amplifyの認証サービス追加</a></h1>
 <h2><a class="header" href="#61-amplifyのauth機能を追加" id="61-amplifyのauth機能を追加">6.1. AmplifyのAuth機能を追加</a></h2>
 <p>こちらも前項と同じく，以下コマンド実行を行いますが，同じように設問となるので注意して下さい。</p>
-<pre><code class="language-csharp"># 以下のコマンドを実行
+<pre><code class="language-bash"># 以下のコマンドを実行
 amplify add auth
 </code></pre>
 <h2><a class="header" href="#62-認証セキュリティ構成の選択" id="62-認証セキュリティ構成の選択">6.2 認証・セキュリティ構成の選択</a></h2>
-<pre><code class="language-csharp"># amplify add authの実行直後
+<pre><code class="language-bash"># amplify add authの実行直後
 Using service: Cognito, provided by: awscloudformation
  
 The current configured provider is Amazon Cognito. 
@@ -180,18 +182,18 @@ uration
 Warning: you will not be able to edit these selections. 
 </code></pre>
 <h2><a class="header" href="#63-ユーザーのログイン方法の選択" id="63-ユーザーのログイン方法の選択">6.3 ユーザーのログイン方法の選択</a></h2>
-<pre><code class="language-csharp"># Usernameを選択
+<pre><code class="language-bash"># Usernameを選択
 How do you want users to be able to sign in? Username
 # No, I am done.を選択
 Do you want to configure advanced settings? No, I am done.
 </code></pre>
 <p><strong>Successfully</strong>まで表示されたら完了です。追加したauthをデプロイします。数分かかるので待ちます。</p>
 <h2><a class="header" href="#64-authサービスのデプロイ" id="64-authサービスのデプロイ">6.4 authサービスのデプロイ</a></h2>
-<pre><code class="language-csharp">$ amplify push --y
+<pre><code class="language-bash">$ amplify push --y
 </code></pre>
 <h2><a class="header" href="#75-awsコンソールで認証アプリを確認" id="75-awsコンソールで認証アプリを確認">7.5 AWSコンソールで認証アプリを確認</a></h2>
 <p>完了すると<code>reactamplify</code>の認証アプリが作成されます。以下のコマンドを実行するとAWSコンソール上でも確認出来ます。</p>
-<pre><code class="language-csharp">$ amplify console
+<pre><code class="language-bash">$ amplify console
 # Consoleを選択 ，今回はUI側の選択には触れません
 ✔ Which site do you want to open? · Console
 </code></pre>
