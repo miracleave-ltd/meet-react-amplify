@@ -1,5 +1,7 @@
 [book]
-authors = []
-language = "en"
+authors = "tanabebe"
+language = ja"
 multilingual = false
 src = "src"
+[output.html]
+additional-css = ["theme/highlight.css"]
