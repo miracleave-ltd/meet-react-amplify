@@ -9,3 +9,4 @@
 - [07. Reactアプリに認証機能追加](./chapter_7.md)
 - [08. 自動デプロイ(CI/CD)の確認と設定変更](./chapter_8.md)
 - [09. Amplifyの認証画面を日本語化し，Reactアプリレイアウトを整える](./chapter_9.md)
+- [10. ハンズオン環境削除](./capter_10.md)
