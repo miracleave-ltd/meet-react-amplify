@@ -9,7 +9,7 @@ Dockerで作成していきます。エディタはVS Code前提となってい�
 作業用ディレクトリとなるプログラムをcloneします。
 clone先はdockerコマンドが動作するご自身の環境に合わせてください。
 
-```sh
+```bash
 git clone https://github.com/Tanabebe/amplify-demo.git && cd amplify-demo
 ```
 
@@ -24,7 +24,7 @@ cloneしたらVS Codeで上記のフォルダを開きます。<br>**※Windows�
 
 以下のコマンドを実行して，コンテナを起動します。`Creating amplify-demo_amplify_1 ... done`とターミナルに表示されればOKです。
 
-```sh
+```bash
 docker-compose up -d
 ```
 
@@ -32,13 +32,13 @@ docker-compose up -d
 
 起動出来たら念の為，コンテナ名と起動状態の確認を行います。以下の例だと`amplify-demo_amplify_1`がコンテナ名です。
 
-```sh
+```bash
 docker-compose ps
 ```
 
 以下のように，**Name**と表示されている箇所がコンテナ名です。
 
-```
+```bash
          Name                     Command            State                       Ports                     
 -----------------------------------------------------------------------------------------------------------
 amplify-demo_amplify_1   docker-entrypoint.sh node   Up      0.0.0.0:3000->3000/tcp, 0.0.0.0:3001->3001/tcp
@@ -46,14 +46,14 @@ amplify-demo_amplify_1   docker-entrypoint.sh node   Up      0.0.0.0:3000->3000/
 
 コンテナ起動は問題ないですが，コンテナ側の`node_modules`はホスト側にマウントしていないため，以降のプログラム修正時に都合が悪いです。無理やり感はありますが，手動でコピーします。
 
-```csharp
+```bash
 # docker cp コンテナ名:/amplify-demo/react-app/node_modules react-app/
 docker cp amplify-demo_amplify_1:/amplify-demo/react-app/node_modules react-app/
 ```
 
 コピーが終わったらコンテナの中に入っていきます。
 
-```csharp
+```bash
 # docker exec -it {コンテナ名} bash 
 docker exec -it amplify-demo_amplify_1 bash
 ```
@@ -62,13 +62,13 @@ docker exec -it amplify-demo_amplify_1 bash
 
 コンテナの中に入ったら念の為，`node`と`npm`のバージョン，`amplify`がインストールされているか確認します。
 
-```sh
+```bash
 node -v && npm -v && amplify --version
 ```
 
 下記のように表示されたらOKです。
 
-```sh
+```bash
 v14.16.1
 6.14.12
 Initializing new Amplify CLI version...
@@ -80,13 +80,13 @@ Plugin scan successful
 
 最後にReactアプリが動作するか確認します。
 
-```sh
+```bash
 yarn start
 ```
 
 以下のようにコンソールに表示されたら`http://localhost:3000`にアクセスしましょう。
 
-```csharp
+```bash
 Compiled successfully!
 
 You can now view react-app in the browser.

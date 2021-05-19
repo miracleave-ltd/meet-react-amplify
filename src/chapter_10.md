@@ -92,13 +92,13 @@ AWSコンソールの作業はこれで完了です。次は使用したコン�
 
 VS Codeのターミナル，もしくはご自身が使用しているターミナルで以下コマンドを実行し，稼働中のコンテナを停止します。停止に完了すると停止したコンテナIDがターミナルに表示されます。
 
-```sh
+```bash
 docker stop $(docker ps -q)
 ```
 
 念の為，停止している全コンテナを確認します。
 
-```sh
+```bash
 docker ps -a
 ```
 
@@ -108,14 +108,14 @@ docker ps -a
 
 以下コマンドを実行します。
 
-```sh
+```bash
 # docker rm コンテナIDもしくはコンテナ名
 docker rm amplify-demo_amplify_1
 ```
 
 コンテナを確認し，消えていればコンテナの削除は完了です。次はイメージを削除します。
 
-```sh
+```bash
 docker ps -a
 ```
 
@@ -123,7 +123,7 @@ docker ps -a
 
 ローカルに保存されているイメージの確認をするので以下コマンドを実行してください。
 
-```sh
+```bash
 docker images
 ```
 
@@ -133,7 +133,7 @@ docker images
 
 コピーしたイメージIDを使用してイメージの削除コマンドを実行します。
 
-```sh
+```bash
 # docker rmi イメージID
 docker rmi 21d270f241ed
 ```
@@ -142,7 +142,7 @@ docker rmi 21d270f241ed
 
 最後にイメージが消えているか確認し，完了です。
 
-```sh
+```bash
 docker images
 ```
 

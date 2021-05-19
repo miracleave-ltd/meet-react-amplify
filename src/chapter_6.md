@@ -4,13 +4,13 @@
 
 こちらも前項と同じく，以下コマンド実行を行いますが，同じように設問となるので注意して下さい。
 
-```csharp
+```bash
 # 以下のコマンドを実行
 amplify add auth
 ```
 
 ## 6.2 認証・セキュリティ構成の選択
-```csharp
+```bash
 # amplify add authの実行直後
 Using service: Cognito, provided by: awscloudformation
  
@@ -23,7 +23,7 @@ Warning: you will not be able to edit these selections.
 
 ## 6.3 ユーザーのログイン方法の選択 
 
-```csharp
+```bash
 # Usernameを選択
 How do you want users to be able to sign in? Username
 # No, I am done.を選択
@@ -34,7 +34,7 @@ Do you want to configure advanced settings? No, I am done.
 
 ## 6.4 authサービスのデプロイ
 
-```csharp
+```bash
 $ amplify push --y
 ```
 
@@ -42,7 +42,7 @@ $ amplify push --y
 
 完了すると`reactamplify`の認証アプリが作成されます。以下のコマンドを実行するとAWSコンソール上でも確認出来ます。
 
-```csharp
+```bash
 $ amplify console
 # Consoleを選択 ，今回はUI側の選択には触れません
 ✔ Which site do you want to open? · Console

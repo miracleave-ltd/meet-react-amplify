@@ -4,14 +4,14 @@
 
 Dockerコンテナに入った状態で実施していきます。Amplifyの設定をしますが以下コマンド実行後は設問となるので注意して下さい。
 
-```sh
-# まずはこのコマンドを実行つ
+```bash
+# まずはこのコマンドを実行する
 amplify configure
 ```
 
 以降ターミナル上で設問が始まるので注意。以降は設問毎に表題を分割しています。
 
-```sh
+```bash
 # amplify configureのコマンド実行直後
 Initializing new Amplify CLI version...
 Done initializing new version.
@@ -25,7 +25,7 @@ Press Enter to continue # ここはEnterを押してOKです
 ```
 
 ### 4.2. リージョンの選択
-```sh
+```bash
 Specify the AWS Region
 # ap-northeast-1を選択し，Enter
 ? region:  ap-northeast-1
@@ -33,14 +33,14 @@ Specify the AWS Region
 
 ### 4.3. IAMユーザー名の入力
 
-```sh
+```bash
 Specify the username of the new IAM user:
 # dev-amplifyと入力し，Enter
 ? user name:  dev-amplify
 ```
 
 ### 4.4. AWSコンソール上でユーザーの確認
-```sh
+```bash
 Complete the user creation using the AWS console
 https://console.aws.amazon.com/iam/home?region=ap-northeast-1#/users$new?step=final&accessKey&userNames=dev-amplify&permissionType=policies&policies=arn:aws:iam::aws:policy%2FAdministratorAccess
 # ご自身のURLが表示されるのでユーザの確認をします（下図を参照）
@@ -63,7 +63,7 @@ URLにアクセスすると下図の画面が表示されますので，ユー�
 ![](./img/2021-05-06-01-50-01.png)
 
 ### 4.5. アクセスキー情報の入力
-```sh
+```bash
 Press Enter to continue　# ←Enterを押してキー情報入力
 Enter the access key of the newly created user:
 # 前項で控えたアクセスキーIDをコピペしてEnter
@@ -73,7 +73,7 @@ Enter the access key of the newly created user:
 ```
 
 ### 5.6. プロファイル名の選択
-```sh
+```bash
 This would update/create the AWS Profile in your local machine
 # デフォルトを選択しEnter
 ? Profile Name:  default

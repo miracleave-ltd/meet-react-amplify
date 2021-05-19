@@ -1,8 +1,10 @@
 [book]
 authors = "tanabebe"
-language = ja"
+language = "ja"
 multilingual = false
 src = "src"
 
 [output.html]
-additional-css = ["theme/highlight.css"]
+curly-quotes = true
+default-theme = "Navy"
+additional-css = ["theme/custome.css"]

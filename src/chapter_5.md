@@ -4,19 +4,19 @@
 
 引き続きDockerコンテナに入った状態で実施していきます。こちらも前項と同じく，以下コマンド実行後は設問となるので注意して下さい。
 
-```sh
+```bash
 # まずは以下を実行
 amplify init
 ```
 
 ## 5.2. 初期化するプロジェクト構成の選択
-```sh
+```bash
 # amplify initのコマンド実行直後
 Note: It is recommended to run this command from the root of your app directory
 ? Enter a name for the project reactamplify # ←Enterを押します
 ```
 
-```sh
+```bash
 The following configuration will be applied:
 
 Project information
@@ -36,7 +36,7 @@ Using default provider  awscloudformation
 
 ## 5.3. 認証方法の種類を選択
 
-```sh
+```bash
 # AWS profileを選択
 ? Select the authentication method you want to use: AWS profile
 
@@ -46,7 +46,7 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
 
 ## 5.4. 使用するプロファイルを選択
 
-```sh
+```bash
 # defaultを選択
 ? Please choose the profile you want to use default
 Adding backend environment dev to AWS Amplify Console app: d2nvyvjheogdaz
