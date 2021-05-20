@@ -180,31 +180,7 @@
 <p><img src="./img/2021-05-19-12-14-59.png" alt="" /></p>
 <p>同じくテキストボックスに<strong>delete</strong>を入力し，<strong>Delete</strong>ボタンを押します。こちらはすぐ削除されます。</p>
 <p><img src="./img/2021-05-19-12-17-09.png" alt="" /></p>
-<h2><a class="header" href="#102-cognitoのidプール削除" id="102-cognitoのidプール削除">10.2. CognitoのIDプール削除</a></h2>
-<p>検索ボックスに<strong>cognito</strong>を入力し，Cognitoのサービスへ飛びます。
-<img src="./img/2021-05-19-12-55-49.png" alt="" /></p>
-<p><strong>IDプールの管理</strong>ボタンを押します。</p>
-<p><img src="./img/2021-05-19-12-57-09.png" alt="" /></p>
-<p>Amplifyで作成したアプリと対応したIDプールがあるので選択します。</p>
-<p><img src="./img/2021-05-19-12-57-57.png" alt="" /></p>
-<p>画面右上の<strong>IDプールの編集</strong>リンクを押します。</p>
-<p><img src="./img/2021-05-19-12-59-27.png" alt="" /></p>
-<p>飛んだ先の画面下部に<strong>IDプールの削除</strong>ボタンがあるので押します。</p>
-<p><img src="./img/2021-05-19-13-02-18.png" alt="" /></p>
-<p><strong>プールの削除</strong>を押し，IDプールの削除は完了です。
-<img src="./img/2021-05-19-13-03-30.png" alt="" /></p>
-<h2><a class="header" href="#103-cognitoのユーザープール削除" id="103-cognitoのユーザープール削除">10.3. Cognitoのユーザープール削除</a></h2>
-<p>再び検索ボックスに<strong>cognito</strong>を入力し，Cognitoのサービスへ飛びます。
-<img src="./img/2021-05-19-12-55-49.png" alt="" /></p>
-<p><strong>ユーザープールの管理</strong>ボタンを押します。</p>
-<p><img src="./img/2021-05-19-13-05-42.png" alt="" /></p>
-<p>Amplifyで作成したアプリと対応したユーザープールがあるので選択します。</p>
-<p><img src="./img/2021-05-19-13-07-10.png" alt="" /></p>
-<p>飛んだ先の画面右上に<strong>プールの削除</strong>リンクがあるので押します。</p>
-<p><img src="./img/2021-05-19-13-08-23.png" alt="" /></p>
-<p>テキストボックスに<strong>delete</strong>と入力し，<strong>プールの削除</strong>ボタンを押して完了です。</p>
-<p><img src="./img/2021-05-19-13-09-50.png" alt="" /></p>
-<h2><a class="header" href="#104-iamユーザーの削除" id="104-iamユーザーの削除">10.4. IAMユーザーの削除</a></h2>
+<h2><a class="header" href="#102-iamユーザーの削除" id="102-iamユーザーの削除">10.2. IAMユーザーの削除</a></h2>
 <p>amplify用に作成したユーザーを削除していきます。検索ボックスに<strong>IAM</strong>と入力し，<strong>ユーザー</strong>を選択してください。</p>
 <p><img src="./img/2021-05-19-12-24-43.png" alt="" /></p>
 <p>削除するユーザーの<strong>チェックボックスをON</strong>にし，<strong>ユーザーの削除</strong>ボタンを押します。</p>
@@ -212,7 +188,7 @@
 <p><strong>チェックボックスをONにし</strong>，<strong>はい，削除します</strong>ボタンを押します。
 <img src="./img/2021-05-19-12-28-56.png" alt="" /></p>
 <p>AWSコンソールの作業はこれで完了です。次は使用したコンテナとイメージを削除します。</p>
-<h2><a class="header" href="#105-dockerコンテナの削除" id="105-dockerコンテナの削除">10.5. Dockerコンテナの削除</a></h2>
+<h2><a class="header" href="#103-dockerコンテナの削除" id="103-dockerコンテナの削除">10.3. Dockerコンテナの削除</a></h2>
 <p>VS Codeのターミナル，もしくはご自身が使用しているターミナルで以下コマンドを実行し，稼働中のコンテナを停止します。停止に完了すると停止したコンテナIDがターミナルに表示されます。</p>
 <pre><code class="language-bash">docker stop $(docker ps -q)
 </code></pre>
@@ -228,7 +204,7 @@ docker rm amplify-demo_amplify_1
 <p>コンテナを確認し，消えていればコンテナの削除は完了です。次はイメージを削除します。</p>
 <pre><code class="language-bash">docker ps -a
 </code></pre>
-<h2><a class="header" href="#106-dockerイメージの削除" id="106-dockerイメージの削除">10.6. Dockerイメージの削除</a></h2>
+<h2><a class="header" href="#104-dockerイメージの削除" id="104-dockerイメージの削除">10.4. Dockerイメージの削除</a></h2>
 <p>ローカルに保存されているイメージの確認をするので以下コマンドを実行してください。</p>
 <pre><code class="language-bash">docker images
 </code></pre>
